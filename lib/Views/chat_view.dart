@@ -20,10 +20,41 @@ class ChatView extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return BubbleChat(massage: 'Hello this world');
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return BubbleChat(massage: 'Heallo world');
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              bottom: 30,
+              top: 16,
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                suffixIcon: Icon(Icons.send),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: kPrimaryColor),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: kPrimaryColor),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: kPrimaryColor, width: 2),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
