@@ -15,6 +15,17 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
+  final ScrollController _scrollController = ScrollController();
+  final double _height = 100.0;
+
+  void _animateToIndex(int index) {
+    _scrollController.animateTo(
+      index * _height,
+      duration: Duration(seconds: 2),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   CollectionReference massages = FirebaseFirestore.instance.collection(
     kMassagesCollection,
   );
@@ -68,8 +79,8 @@ class _ChatViewState extends State<ChatView> {
                   children: [
                     Expanded(
                       child: ListView.builder(
+                        controller: _scrollController,
                         itemCount: snapshot.data!.docs.length,
-
                         itemBuilder: (context, index) {
                           return BubbleChat(massage: massagesList[index]);
                         },
@@ -89,6 +100,7 @@ class _ChatViewState extends State<ChatView> {
                             'text': value,
                             kCreatedAtCollection: DateTime.now(),
                           });
+                          _animateToIndex(10);
                           controller.clear();
                         },
                         decoration: InputDecoration(
