@@ -139,7 +139,7 @@ class FriendWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text('Ahmed khaled', style: TextStyle(fontSize: 10)),
+                          Text(friendModel.id, style: TextStyle(fontSize: 10)),
                         ],
                       ),
                     ),
