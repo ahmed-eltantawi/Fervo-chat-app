@@ -14,9 +14,18 @@ class DrawerView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 30),
         child: Column(
           children: [
-            SizedBox(height: 40),
+            SizedBox(height: 50),
 
-            Center(child: Image.asset(kAppIcon)),
+            CircleAvatar(backgroundImage: AssetImage(kAppIcon), radius: 50),
+            SizedBox(height: 10),
+            Text(
+              'Fervo Chat',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontFamily: 'Pacifico',
+              ),
+            ),
             SizedBox(height: 40),
             GestureDetector(
               onTap: () {

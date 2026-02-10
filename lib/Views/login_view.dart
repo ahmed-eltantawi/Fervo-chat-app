@@ -37,28 +37,36 @@ class _LoginViewState extends State<LoginView> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Form(
               key: formKey,
-              child: Column(
+              child: ListView(
                 children: [
-                  Spacer(flex: 1),
+                  SizedBox(height: 100),
                   AppIconWidget(),
                   SizedBox(height: 20),
                   Row(
                     children: [Text('Sign In', style: TextStyle(fontSize: 25))],
                   ),
                   SizedBox(height: 10),
-                  CustomFormTextField(
-                    hintText: 'Email',
-                    onChanged: (value) {
-                      email = value;
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  CustomFormTextField(
-                    hide: true,
-                    hintText: 'Password',
-                    onChanged: (value) {
-                      password = value;
-                    },
+                  Column(
+                    children: [
+                      CustomFormTextField(
+                        textInputAction: TextInputAction.next,
+
+                        hintText: 'Email',
+                        onChanged: (value) {
+                          email = value;
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      CustomFormTextField(
+                        textInputAction: TextInputAction.done,
+
+                        hide: true,
+                        hintText: 'Password',
+                        onChanged: (value) {
+                          password = value;
+                        },
+                      ),
+                    ],
                   ),
                   SizedBox(height: 20),
                   CustomBottom(

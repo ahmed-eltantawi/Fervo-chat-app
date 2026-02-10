@@ -6,10 +6,12 @@ class CustomFormTextField extends StatelessWidget {
     required this.hintText,
     this.onChanged,
     this.hide = false,
+    required this.textInputAction,
   });
   final String hintText;
   final Function(String)? onChanged;
   final bool hide;
+  final TextInputAction textInputAction;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,10 +20,8 @@ class CustomFormTextField extends StatelessWidget {
         color: Theme.of(context).colorScheme.tertiary,
       ),
       child: TextFormField(
-        textInputAction: TextInputAction.previous,
-        onFieldSubmitted: (value) {
-          FocusScope.of(context).previousFocus();
-        },
+        textInputAction: textInputAction,
+
         cursorColor: Theme.of(context).colorScheme.primary,
         style: TextStyle(color: Theme.of(context).colorScheme.primary),
         obscureText: hide,

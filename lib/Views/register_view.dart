@@ -52,6 +52,7 @@ class _RegisterViewState extends State<RegisterView> {
                     children: [
                       SizedBox(height: 10),
                       CustomFormTextField(
+                        textInputAction: TextInputAction.next,
                         hintText: 'Your Name',
                         onChanged: (value) {
                           userName = value.capitalize();
@@ -59,6 +60,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       SizedBox(height: 15),
                       CustomFormTextField(
+                        textInputAction: TextInputAction.next,
                         hintText: 'Email',
                         onChanged: (value) {
                           email = value.toLowerCase();
@@ -66,6 +68,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       SizedBox(height: 15),
                       CustomFormTextField(
+                        textInputAction: TextInputAction.done,
                         hide: true,
                         hintText: 'Password',
                         onChanged: (value) {
