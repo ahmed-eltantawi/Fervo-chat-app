@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color kPrimaryColor = Color(0xff2E465E);
-const String kAppIcon = 'assets/images/app_icon.png';
+const String kAppIcon = 'assets/images/splash.png';
 const String kMassagesCollection = 'massages';
 const String kCreatedAtCollection = 'createdAt';
 const String kFriendsCollection = 'users';
