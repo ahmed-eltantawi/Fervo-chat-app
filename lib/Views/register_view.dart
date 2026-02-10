@@ -1,5 +1,6 @@
 import 'package:chat_with_me_now/Views/error_view.dart';
 import 'package:chat_with_me_now/Views/otp_view.dart';
+import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
@@ -41,15 +42,7 @@ class _RegisterViewState extends State<RegisterView> {
               child: ListView(
                 children: [
                   SizedBox(height: 100),
-
-                  Image.asset(kAppIcon, height: 100),
-                  Text(
-                    textAlign: TextAlign.center,
-                    'Scalar Chat',
-                    style: TextStyle(fontSize: 32, fontFamily: 'Pacifico'),
-                  ),
-                  SizedBox(height: 40),
-
+                  AppIconWidget(),
                   Row(
                     children: [
                       Text('Register', style: TextStyle(fontSize: 25)),

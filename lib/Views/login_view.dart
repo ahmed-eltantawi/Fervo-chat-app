@@ -1,7 +1,7 @@
 import 'package:chat_with_me_now/Views/register_view.dart';
+import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:chat_with_me_now/helper/user_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,15 +40,8 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 children: [
                   Spacer(flex: 1),
-                  Image.asset(kAppIcon),
-                  Text(
-                    'Scalar Chat',
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: Colors.white,
-                      fontFamily: 'Pacifico',
-                    ),
-                  ),
+                  AppIconWidget(),
+                  SizedBox(height: 20),
                   Row(
                     children: [Text('Sign In', style: TextStyle(fontSize: 25))],
                   ),
