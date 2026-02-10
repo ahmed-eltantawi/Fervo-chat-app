@@ -1,4 +1,3 @@
-import 'package:chat_with_me_now/Views/chat_view.dart';
 import 'package:chat_with_me_now/Views/home_view.dart';
 import 'package:chat_with_me_now/Views/login_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
@@ -28,13 +27,14 @@ class ChatApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
       routes: {
-        ChatView.id: (context) => ChatView(),
+        // ChatView.id: (context) => ChatView(),
         LoginView.id: (context) => LoginView(),
         RegisterView.id: (context) => RegisterView(),
         HomeView.id: (context) => HomeView(),
       },
 
       initialRoute: LoginView.id,
+      // home: otpView(email: 'ahmed@gmail.com'),
     );
   }
 }

@@ -1,6 +1,4 @@
-import 'dart:developer';
-
-import 'package:chat_with_me_now/Views/chat_view_between_two.dart';
+import 'package:chat_with_me_now/Views/chat_view.dart';
 import 'package:chat_with_me_now/Views/drawer_view.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
@@ -84,14 +82,19 @@ class FriendWidget extends StatelessWidget {
     var circleAvatar = CircleAvatar(
       backgroundColor: Theme.of(context).colorScheme.secondary,
 
+      backgroundImage: friendModel.image != null
+          ? NetworkImage(friendModel.image!)
+          : null,
       radius: 30,
-      child: Text(
-        friendModel.name[0],
-        style: TextStyle(
-          fontSize: 30,
-          color: Theme.of(context).colorScheme.inversePrimary,
-        ),
-      ),
+      child: friendModel.image != ''
+          ? null
+          : Text(
+              friendModel.name[0],
+              style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
     );
     return GestureDetector(
       onTap: () {
@@ -139,7 +142,7 @@ class FriendWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(friendModel.id, style: TextStyle(fontSize: 10)),
+                          Text(friendModel.id, style: TextStyle(fontSize: 15)),
                         ],
                       ),
                     ),

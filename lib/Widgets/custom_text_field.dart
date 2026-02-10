@@ -18,6 +18,10 @@ class CustomFormTextField extends StatelessWidget {
         color: Theme.of(context).colorScheme.tertiary,
       ),
       child: TextFormField(
+        textInputAction: TextInputAction.previous,
+        onFieldSubmitted: (value) {
+          FocusScope.of(context).previousFocus();
+        },
         cursorColor: Theme.of(context).colorScheme.primary,
         style: TextStyle(color: Theme.of(context).colorScheme.primary),
         obscureText: hide,
@@ -25,6 +29,7 @@ class CustomFormTextField extends StatelessWidget {
           if (value!.isEmpty) {
             return "Field is required";
           }
+
           return null;
         },
         onChanged: onChanged,

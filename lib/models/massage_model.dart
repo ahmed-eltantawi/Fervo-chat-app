@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class MassageModel {
   String massage;
   String id;

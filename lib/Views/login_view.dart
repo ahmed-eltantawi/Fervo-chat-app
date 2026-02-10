@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_with_me_now/Views/register_view.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
@@ -90,9 +88,11 @@ class _LoginViewState extends State<LoginView> {
                           } else {
                             try {
                               await userLogin(context, email!, password!);
+                              if (!mounted) return;
                               email = '';
                               password = '';
                             } on FirebaseAuthException catch (e) {
+                              if (!mounted) return;
                               if (e.code == 'user-not-found') {
                                 showSnackBar(
                                   context,
@@ -112,6 +112,7 @@ class _LoginViewState extends State<LoginView> {
                             }
                           }
                         }
+                        if (!mounted) return;
 
                         setState(() {
                           isLoading = false;

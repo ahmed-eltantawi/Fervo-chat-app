@@ -1,12 +1,15 @@
-import 'package:flutter/foundation.dart';
-
 class FriendModel {
   final String name;
   final String id;
+  String? image;
 
-  FriendModel({required this.name, required this.id});
+  FriendModel({required this.name, required this.id, this.image});
 
   factory FriendModel.fromJson(json) {
-    return FriendModel(name: json['name'], id: json['id']);
+    return FriendModel(
+      name: json['name'],
+      id: json['id'],
+      image: json['image'],
+    );
   }
 }

@@ -1,13 +1,10 @@
-import 'dart:developer';
-
 import 'package:chat_with_me_now/Views/error_view.dart';
+import 'package:chat_with_me_now/Views/otp_view.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
-import 'package:chat_with_me_now/helper/user_login.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -21,9 +18,6 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  CollectionReference users = FirebaseFirestore.instance.collection(
-    kFriendsCollection,
-  );
   String? email;
 
   String? password;
@@ -61,27 +55,31 @@ class _RegisterViewState extends State<RegisterView> {
                       Text('Register', style: TextStyle(fontSize: 25)),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  CustomFormTextField(
-                    hintText: 'Your Name',
-                    onChanged: (value) {
-                      userName = value.capitalize();
-                    },
-                  ),
-                  SizedBox(height: 10),
-                  CustomFormTextField(
-                    hintText: 'Email',
-                    onChanged: (value) {
-                      email = value.toLowerCase();
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  CustomFormTextField(
-                    hide: true,
-                    hintText: 'Password',
-                    onChanged: (value) {
-                      password = value;
-                    },
+                  Column(
+                    children: [
+                      SizedBox(height: 10),
+                      CustomFormTextField(
+                        hintText: 'Your Name',
+                        onChanged: (value) {
+                          userName = value.capitalize();
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      CustomFormTextField(
+                        hintText: 'Email',
+                        onChanged: (value) {
+                          email = value.toLowerCase();
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      CustomFormTextField(
+                        hide: true,
+                        hintText: 'Password',
+                        onChanged: (value) {
+                          password = value;
+                        },
+                      ),
+                    ],
                   ),
                   SizedBox(height: 20),
                   CustomBottom(
@@ -92,14 +90,18 @@ class _RegisterViewState extends State<RegisterView> {
                       });
                       if (formKey.currentState!.validate()) {
                         try {
-                          await registerUser();
-                          Navigator.pop(context);
-                          await userLogin(context, email!, password!);
-                          users.add({
-                            'id': email,
-                            'name': userName,
-                            'createdAt': DateTime.now(),
-                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return OTPView(
+                                  email: email!,
+                                  password: password!,
+                                  userName: userName!,
+                                );
+                              },
+                            ),
+                          );
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
                             showSnackBar(
@@ -156,10 +158,5 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
-  }
-
-  Future<void> registerUser() async {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email!, password: password!);
   }
 }

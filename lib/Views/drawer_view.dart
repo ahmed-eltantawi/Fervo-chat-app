@@ -1,3 +1,4 @@
+import 'package:chat_with_me_now/Views/login_view.dart';
 import 'package:chat_with_me_now/Views/settings_view.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:flutter/material.dart';
@@ -46,9 +47,11 @@ class DrawerView extends StatelessWidget {
             Spacer(flex: 1),
             GestureDetector(
               onTap: () {
-                while (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  LoginView.id,
+                  (route) => false,
+                );
               },
 
               child: ListTile(
