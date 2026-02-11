@@ -9,13 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  // Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   //OTP Settings
   EmailOTP.config(
     appName: 'Fervo',
-    otpLength: 5,
+    otpLength: 4,
     otpType: OTPType.numeric,
     emailTheme: EmailTheme.v3,
   );

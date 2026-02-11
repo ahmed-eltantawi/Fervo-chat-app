@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_with_me_now/Views/error_view.dart';
 import 'package:chat_with_me_now/Views/otp_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
@@ -5,8 +7,11 @@ import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class RegisterView extends StatefulWidget {
@@ -83,47 +88,69 @@ class _RegisterViewState extends State<RegisterView> {
                       setState(() {
                         isLoading = true;
                       });
-                      if (formKey.currentState!.validate()) {
-                        try {
+                      final bool isConnected =
+                          await InternetConnection().hasInternetAccess;
+                      if (!isConnected) {
+                        showSnackBar(context, 'No internet connection.');
+                      } else {
+                        if (formKey.currentState!.validate()) {
+                          if (!EmailValidator.validate(email!)) {
+                            showSnackBar(
+                              context,
+                              'Email is not valid email, try To enter a right one',
+                            );
+                          }
+
+                          if (await isThisEmailExists(email!)) {
+                            showSnackBar(
+                              context,
+                              "This Email ID already Associated with Another Account.",
+                            );
+                          } else {
+                            try {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return OTPView(
+                                      email: email!,
+                                      password: password!,
+                                      userName: userName!,
+                                    );
+                                  },
+                                ),
+                              );
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'weak-password') {
+                                showSnackBar(
+                                  context,
+                                  'The password provided is too weak.',
+                                );
+                              } else if (e.code == 'email-already-in-use') {
+                                showSnackBar(
+                                  context,
+                                  'The account already exists for that email.',
+                                );
+                              }
+                            } catch (e) {
+                              showSnackBar(
+                                context,
+                                'There some thing Wrong, please try again',
+                              );
+                            }
+                          }
+                        } else if (email != null &&
+                            userName != null &&
+                            password != null) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return OTPView(
-                                  email: email!,
-                                  password: password!,
-                                  userName: userName!,
-                                );
+                                return ErrorView();
                               },
                             ),
                           );
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'weak-password') {
-                            showSnackBar(
-                              context,
-                              'The password provided is too weak.',
-                            );
-                          } else if (e.code == 'email-already-in-use') {
-                            showSnackBar(
-                              context,
-                              'The account already exists for that email.',
-                            );
-                          }
-                        } catch (e) {
-                          showSnackBar(
-                            context,
-                            'There some thing Wrong, please try again',
-                          );
                         }
-                      } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ErrorView();
-                            },
-                          ),
-                        );
                       }
                       setState(() {
                         isLoading = false;
@@ -153,5 +180,19 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
+  }
+
+  Future<bool> isThisEmailExists(String email) async {
+    try {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: email)
+          .get();
+
+      return querySnapshot.docs.isNotEmpty;
+    } catch (e) {
+      log("Error checking email: ${e.toString()}");
+      return false;
+    }
   }
 }

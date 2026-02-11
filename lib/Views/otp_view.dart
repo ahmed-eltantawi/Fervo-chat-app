@@ -6,6 +6,7 @@ import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class OTPView extends StatefulWidget {
@@ -32,6 +33,7 @@ class _OTPViewState extends State<OTPView> {
 
   int? pin4;
   bool isLoading = false;
+  String image = 'assets/images/email sended.json';
 
   @override
   void initState() {
@@ -57,91 +59,109 @@ class _OTPViewState extends State<OTPView> {
         appBar: AppBar(),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: [
-              Text(
-                'We just sent an email',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'Enter the security code we sent to:',
-                style: TextStyle(fontSize: 16),
-              ),
-
-              Text(widget.email),
-              SizedBox(height: 50),
-              Form(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _CustomTextOtp(
-                      onChanged: (value) {
-                        pin1 = int.tryParse(value);
-                      },
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 250,
+                    child: LottieBuilder.asset(
+                      image,
+                      repeat: false,
+                      key: ValueKey(image),
                     ),
-                    _CustomTextOtp(
-                      onChanged: (value) {
-                        pin2 = int.tryParse(value);
-                      },
-                    ),
-                    _CustomTextOtp(
-                      onChanged: (value) {
-                        pin3 = int.tryParse(value);
-                      },
-                    ),
-                    _CustomTextOtp(
-                      onChanged: (value) {
-                        pin4 = int.tryParse(value);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 100),
-              CustomBottom(
-                text: 'Verify',
-                onTap: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
+                  ),
+                  Text(
+                    'We just sent an email',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Enter the security code we sent to:',
+                    style: TextStyle(fontSize: 16),
+                  ),
 
-                  //*===============================================
-                  // TODO: And try to inhace the Ui of the OTP view
-                  //*===============================================
+                  Text(widget.email),
+                  SizedBox(height: 50),
+                  Form(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _CustomTextOtp(
+                          onChanged: (value) {
+                            pin1 = int.tryParse(value);
+                          },
+                        ),
+                        _CustomTextOtp(
+                          onChanged: (value) {
+                            pin2 = int.tryParse(value);
+                          },
+                        ),
+                        _CustomTextOtp(
+                          onChanged: (value) {
+                            pin3 = int.tryParse(value);
+                          },
+                        ),
+                        _CustomTextOtp(
+                          onChanged: (value) {
+                            pin4 = int.tryParse(value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 70),
+                  CustomBottom(
+                    text: 'Verify',
+                    onTap: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
 
-                  var otp = '$pin1$pin2$pin3$pin4';
-                  if (otp.contains('null')) {
-                    showSnackBar(context, 'Enter all digest, please');
-                  } else {
-                    log(otp);
+                      //*===============================================
+                      // TODO: And try to inhace the Ui of the OTP view
+                      //*===============================================
 
-                    if (EmailOTP.verifyOTP(otp: otp)) {
-                      showSnackBar(context, 'OTP is Correct');
-                      await registerFunction(
-                        context: context,
-                        email: widget.email,
-                        password: widget.password,
-                        userName: widget.userName,
-                      );
-                    } else {
-                      showSnackBar(context, 'OTP is incorrect');
-                    }
-                  }
-                  setState(() {
-                    isLoading = false;
-                  });
-                },
-              ),
-              SizedBox(height: 15),
-              GestureDetector(
-                onTap: () {
-                  sendOtpCode();
-                },
-                child: Text(
-                  'Resend The verification Email',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                      var otp = '$pin1$pin2$pin3$pin4';
+                      if (otp.contains('null')) {
+                        showSnackBar(context, 'Enter all digest, please');
+                      } else {
+                        log(otp);
+
+                        if (EmailOTP.verifyOTP(otp: otp)) {
+                          showSnackBar(context, 'OTP is Correct');
+                          await registerFunction(
+                            context: context,
+                            email: widget.email,
+                            password: widget.password,
+                            userName: widget.userName,
+                          );
+                        } else {
+                          showSnackBar(context, 'OTP is incorrect');
+                          setState(() {
+                            image = 'assets/images/error x.json';
+                          });
+                        }
+                      }
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                      sendOtpCode();
+                      setState(() {
+                        image = 'assets/images/email sended.json';
+                      });
+                    },
+                    child: Text(
+                      'Resend The verification Email',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
