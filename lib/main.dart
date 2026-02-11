@@ -3,6 +3,7 @@ import 'package:chat_with_me_now/Views/login_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
 import 'package:chat_with_me_now/firebase_options.dart';
 import 'package:chat_with_me_now/theme/theme_probider.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,24 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  //OTP Settings
+  EmailOTP.config(
+    appName: 'Fervo',
+    otpLength: 5,
+    otpType: OTPType.numeric,
+    emailTheme: EmailTheme.v3,
+  );
+
+  //Server Settings
+  EmailOTP.setSMTP(
+    host: 'smtp.gmail.com',
+    emailPort: EmailPort.port587,
+    secureType: SecureType.tls,
+    username: 'listen.me.127@gmail.com',
+    password: 'wjtm lmre tdeo azot',
+  );
+
   runApp(
     ChangeNotifierProvider(
       child: const ChatApp(),

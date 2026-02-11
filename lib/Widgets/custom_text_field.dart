@@ -34,6 +34,8 @@ class CustomFormTextField extends StatelessWidget {
         },
         onChanged: onChanged,
         decoration: InputDecoration(
+          border: InputBorder.none,
+
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Theme.of(context).colorScheme.inversePrimary,

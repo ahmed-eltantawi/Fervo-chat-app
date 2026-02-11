@@ -46,28 +46,26 @@ class _LoginViewState extends State<LoginView> {
                     children: [Text('Sign In', style: TextStyle(fontSize: 25))],
                   ),
                   SizedBox(height: 10),
-                  Column(
-                    children: [
-                      CustomFormTextField(
-                        textInputAction: TextInputAction.next,
 
-                        hintText: 'Email',
-                        onChanged: (value) {
-                          email = value;
-                        },
-                      ),
-                      SizedBox(height: 15),
-                      CustomFormTextField(
-                        textInputAction: TextInputAction.done,
+                  CustomFormTextField(
+                    textInputAction: TextInputAction.next,
 
-                        hide: true,
-                        hintText: 'Password',
-                        onChanged: (value) {
-                          password = value;
-                        },
-                      ),
-                    ],
+                    hintText: 'Email',
+                    onChanged: (value) {
+                      email = value;
+                    },
                   ),
+                  SizedBox(height: 15),
+                  CustomFormTextField(
+                    textInputAction: TextInputAction.done,
+
+                    hide: true,
+                    hintText: 'Password',
+                    onChanged: (value) {
+                      password = value;
+                    },
+                  ),
+
                   SizedBox(height: 20),
                   CustomBottom(
                     text: 'Sign In',

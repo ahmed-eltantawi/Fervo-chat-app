@@ -3,7 +3,6 @@ import 'package:chat_with_me_now/Views/otp_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';

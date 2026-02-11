@@ -3,11 +3,13 @@ import 'dart:developer';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/helper/register_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class OTPView extends StatelessWidget {
-  OTPView({
+class OTPView extends StatefulWidget {
+  const OTPView({
     super.key,
     required this.email,
     required this.password,
@@ -16,91 +18,133 @@ class OTPView extends StatelessWidget {
   final String email;
   final String password;
   final String userName;
+
+  @override
+  State<OTPView> createState() => _OTPViewState();
+}
+
+class _OTPViewState extends State<OTPView> {
   int? pin1;
+
   int? pin2;
+
   int? pin3;
+
   int? pin4;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    sendOtpCode();
+  }
+
+  Future<void> sendOtpCode() async {
+    bool result = await EmailOTP.sendOTP(email: widget.email);
+
+    if (result) {
+      showSnackBar(context, 'The OTP is sended correctly');
+    } else {
+      showSnackBar(context, 'Sending failed, Try again');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Spacer(flex: 2),
-            Text(
-              'We just sent an email',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Enter the security code we sent to:',
-              style: TextStyle(fontSize: 16),
-            ),
-
-            Text(email),
-            SizedBox(height: 50),
-            Form(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _CustomTextOtp(
-                    onChanged: (value) {
-                      pin1 = int.tryParse(value);
-                    },
-                  ),
-                  _CustomTextOtp(
-                    onChanged: (value) {
-                      pin2 = int.tryParse(value);
-                    },
-                  ),
-                  _CustomTextOtp(
-                    onChanged: (value) {
-                      pin3 = int.tryParse(value);
-                    },
-                  ),
-                  _CustomTextOtp(
-                    onChanged: (value) {
-                      pin4 = int.tryParse(value);
-                    },
-                  ),
-                ],
+    return ModalProgressHUD(
+      inAsyncCall: isLoading,
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'We just sent an email',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
-            ),
-            SizedBox(height: 100),
-            CustomBottom(
-              text: 'Verify',
-              onTap: () async {
-                //* The OTP value be setting here
-                //*=============================================================
-                //*=============================================================
-                // TODO: use it with the package of the otp to check
-                // TODO: The email is the email's user
-                // TODO: And try to inhace the Ui of the OTP view
-                // TODO: another thing Link this view with the regestier view
-                // I think the better way to to that is the navgator . push
-                // also make sure after all of this the app flow is working well
-                // ? The App flow should be when the user click on register view
-                // ? move him to OTP view then move him to chat app
-                //*=============================================================
-                //*=============================================================
-                var x = '$pin1$pin2$pin3$pin4';
-                if (x.contains('null')) {
-                  showSnackBar(context, 'Enter all digest, please');
-                } else {
-                  log(x);
+              Text(
+                'Enter the security code we sent to:',
+                style: TextStyle(fontSize: 16),
+              ),
 
-                  await registerFunction(
-                    context: context,
-                    email: email,
-                    password: password,
-                    userName: userName,
-                  );
-                }
-              },
-            ),
-            Spacer(flex: 5),
-          ],
+              Text(widget.email),
+              SizedBox(height: 50),
+              Form(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _CustomTextOtp(
+                      onChanged: (value) {
+                        pin1 = int.tryParse(value);
+                      },
+                    ),
+                    _CustomTextOtp(
+                      onChanged: (value) {
+                        pin2 = int.tryParse(value);
+                      },
+                    ),
+                    _CustomTextOtp(
+                      onChanged: (value) {
+                        pin3 = int.tryParse(value);
+                      },
+                    ),
+                    _CustomTextOtp(
+                      onChanged: (value) {
+                        pin4 = int.tryParse(value);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 100),
+              CustomBottom(
+                text: 'Verify',
+                onTap: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+
+                  //*===============================================
+                  // TODO: And try to inhace the Ui of the OTP view
+                  //*===============================================
+
+                  var otp = '$pin1$pin2$pin3$pin4';
+                  if (otp.contains('null')) {
+                    showSnackBar(context, 'Enter all digest, please');
+                  } else {
+                    log(otp);
+
+                    if (EmailOTP.verifyOTP(otp: otp)) {
+                      showSnackBar(context, 'OTP is Correct');
+                      await registerFunction(
+                        context: context,
+                        email: widget.email,
+                        password: widget.password,
+                        userName: widget.userName,
+                      );
+                    } else {
+                      showSnackBar(context, 'OTP is incorrect');
+                    }
+                  }
+                  setState(() {
+                    isLoading = false;
+                  });
+                },
+              ),
+              SizedBox(height: 15),
+              GestureDetector(
+                onTap: () {
+                  sendOtpCode();
+                },
+                child: Text(
+                  'Resend The verification Email',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -108,8 +152,8 @@ class OTPView extends StatelessWidget {
 }
 
 class _CustomTextOtp extends StatelessWidget {
-  _CustomTextOtp({super.key, required this.onChanged});
-  Function onChanged;
+  const _CustomTextOtp({required this.onChanged});
+  final Function onChanged;
   @override
   Widget build(BuildContext context) {
     return Container(

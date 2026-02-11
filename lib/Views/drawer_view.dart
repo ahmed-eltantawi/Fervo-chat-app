@@ -20,11 +20,7 @@ class DrawerView extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               'Fervo Chat',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-                fontFamily: 'Pacifico',
-              ),
+              style: TextStyle(fontSize: 20, fontFamily: 'Pacifico'),
             ),
             SizedBox(height: 40),
             GestureDetector(
