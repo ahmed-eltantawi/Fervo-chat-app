@@ -1,5 +1,6 @@
+import 'package:chat_with_me_now/Views/acount_view.dart';
 import 'package:chat_with_me_now/Views/home_view.dart';
-import 'package:chat_with_me_now/Views/login_view.dart';
+import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
 import 'package:chat_with_me_now/firebase_options.dart';
 import 'package:chat_with_me_now/theme/theme_probider.dart';
@@ -47,14 +48,13 @@ class ChatApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
       routes: {
-        // ChatView.id: (context) => ChatView(),
-        LoginView.id: (context) => LoginView(),
+        SignIn.id: (context) => SignIn(),
         RegisterView.id: (context) => RegisterView(),
         HomeView.id: (context) => HomeView(),
+        AccountView.id: (context) => AccountView(),
       },
 
-      initialRoute: LoginView.id,
-      // home: otpView(email: 'ahmed@gmail.com'),
+      initialRoute: SignIn.id,
     );
   }
 }

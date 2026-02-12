@@ -1,18 +1,17 @@
-import 'dart:developer';
-
 import 'package:chat_with_me_now/Views/error_view.dart';
 import 'package:chat_with_me_now/Views/otp_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
+import 'package:chat_with_me_now/auth/isTheEmailExists.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:vibration/vibration.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -92,9 +91,12 @@ class _RegisterViewState extends State<RegisterView> {
                           await InternetConnection().hasInternetAccess;
                       if (!isConnected) {
                         showSnackBar(context, 'No internet connection.');
+                        vibration();
                       } else {
                         if (formKey.currentState!.validate()) {
                           if (!EmailValidator.validate(email!)) {
+                            vibration();
+
                             showSnackBar(
                               context,
                               'Email is not valid email, try To enter a right one',
@@ -102,6 +104,7 @@ class _RegisterViewState extends State<RegisterView> {
                           }
 
                           if (await isThisEmailExists(email!)) {
+                            vibration();
                             showSnackBar(
                               context,
                               "This Email ID already Associated with Another Account.",
@@ -121,6 +124,8 @@ class _RegisterViewState extends State<RegisterView> {
                                 ),
                               );
                             } on FirebaseAuthException catch (e) {
+                              vibration();
+
                               if (e.code == 'weak-password') {
                                 showSnackBar(
                                   context,
@@ -133,6 +138,8 @@ class _RegisterViewState extends State<RegisterView> {
                                 );
                               }
                             } catch (e) {
+                              vibration();
+
                               showSnackBar(
                                 context,
                                 'There some thing Wrong, please try again',
@@ -142,6 +149,7 @@ class _RegisterViewState extends State<RegisterView> {
                         } else if (email != null &&
                             userName != null &&
                             password != null) {
+                          vibration();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -182,17 +190,9 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  Future<bool> isThisEmailExists(String email) async {
-    try {
-      var querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('id', isEqualTo: email)
-          .get();
-
-      return querySnapshot.docs.isNotEmpty;
-    } catch (e) {
-      log("Error checking email: ${e.toString()}");
-      return false;
+  void vibration() async {
+    if (await Vibration.hasVibrator()) {
+      Vibration.vibrate();
     }
   }
 }

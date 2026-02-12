@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
-import 'package:chat_with_me_now/helper/register_function.dart';
+import 'package:chat_with_me_now/auth/register_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
@@ -124,6 +124,9 @@ class _OTPViewState extends State<OTPView> {
 
                       var otp = '$pin1$pin2$pin3$pin4';
                       if (otp.contains('null')) {
+                        setState(() {
+                          image = 'assets/images/error x.json';
+                        });
                         showSnackBar(context, 'Enter all digest, please');
                       } else {
                         log(otp);

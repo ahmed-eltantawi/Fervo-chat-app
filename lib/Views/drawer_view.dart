@@ -1,4 +1,5 @@
-import 'package:chat_with_me_now/Views/login_view.dart';
+import 'package:chat_with_me_now/Views/acount_view.dart';
+import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Views/settings_view.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:flutter/material.dart';
@@ -49,12 +50,23 @@ class DrawerView extends StatelessWidget {
                 leading: Icon(Icons.settings),
               ),
             ),
+
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AccountView.id);
+              },
+              child: ListTile(
+                title: Text('A C C O U N T'),
+                leading: Icon(Icons.person_4),
+              ),
+            ),
             Spacer(flex: 1),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  LoginView.id,
+                  SignIn.id,
                   (route) => false,
                 );
               },
