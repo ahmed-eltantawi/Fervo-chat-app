@@ -1,22 +1,3 @@
-<![CDATA[# 🔥 Fervo Chat
-
-<p align="center">
-  <img src="assets/images/splash.png" alt="Fervo Chat Logo" width="200"/>
-</p>
-
-<p align="center">
-  A real-time chat application built with <strong>Flutter</strong> and <strong>Firebase</strong>, featuring modern authentication methods, OTP email verification, and a beautiful UI with dark/light theme support.
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Flutter-3.10+-02569B?logo=flutter&logoColor=white" alt="Flutter"/>
-  <img src="https://img.shields.io/badge/Dart-3.10+-0175C2?logo=dart&logoColor=white" alt="Dart"/>
-  <img src="https://img.shields.io/badge/Firebase-Auth%20%7C%20Firestore-FFCA28?logo=firebase&logoColor=black" alt="Firebase"/>
-  <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS-green" alt="Platform"/>
-  <img src="https://img.shields.io/badge/License-MIT-blue" alt="License"/>
-</p>
-
----
 
 ## 📖 Overview
 
