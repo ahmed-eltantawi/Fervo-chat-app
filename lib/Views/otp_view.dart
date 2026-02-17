@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/auth/register_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
@@ -129,8 +127,6 @@ class _OTPViewState extends State<OTPView> {
                         });
                         showSnackBar(context, 'Enter all digest, please');
                       } else {
-                        log(otp);
-
                         if (EmailOTP.verifyOTP(otp: otp)) {
                           showSnackBar(context, 'OTP is Correct');
                           await registerFunction(

@@ -1,10 +1,9 @@
-import 'dart:developer';
 import 'package:chat_with_me_now/Views/home_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
-import 'package:chat_with_me_now/auth/goolge_sign_in.dart';
+import 'package:chat_with_me_now/auth/sing_in_methods.dart';
 import 'package:chat_with_me_now/auth/make_user_and_sing_in_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:chat_with_me_now/auth/user_login.dart';
@@ -143,10 +142,11 @@ class _SignInState extends State<SignIn> {
                       CustomBottom(
                         text: 'Sign In with Google',
                         onTap: () async {
-                          log('0');
                           try {
-                            await signInWithGoogle();
-                            log('3');
+                            setState(() {
+                              isLoading = true;
+                            });
+                            await SignInMethods.google();
                             User user = FirebaseAuth.instance.currentUser!;
 
                             await makeUser(
@@ -157,11 +157,53 @@ class _SignInState extends State<SignIn> {
                               image: user.photoURL,
                             );
                           } catch (e) {
+                            vibration();
                             showSnackBar(
                               context,
                               'Wrong with Google sing in, try again',
                             );
                           }
+                          setState(() {
+                            isLoading = false;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 15),
+
+                      CustomBottom(
+                        text: 'Sign In with Facebook',
+                        onTap: () async {
+                          try {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            await SignInMethods.facebook();
+                            User user = FirebaseAuth.instance.currentUser!;
+                            await makeUser(
+                              context,
+                              user.email,
+                              user.uid,
+                              user.displayName,
+                              image: user.photoURL,
+                            );
+                          } catch (e) {
+                            vibration();
+                            if (e.toString() ==
+                                ' [firebase_auth/account-exists-with-different-credential] An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.') {
+                              showSnackBar(
+                                context,
+                                'This email is used before.',
+                              );
+                            } else {
+                              showSnackBar(
+                                context,
+                                'Wrong with Facebook sing in, try again',
+                              );
+                            }
+                          }
+                          setState(() {
+                            isLoading = false;
+                          });
                         },
                       ),
                       SizedBox(height: 10),

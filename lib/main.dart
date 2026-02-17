@@ -5,6 +5,7 @@ import 'package:chat_with_me_now/Views/register_view.dart';
 import 'package:chat_with_me_now/firebase_options.dart';
 import 'package:chat_with_me_now/theme/theme_probider.dart';
 import 'package:email_otp/email_otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,14 +34,15 @@ void main() async {
 
   runApp(
     ChangeNotifierProvider(
-      child: const ChatApp(),
+      child: ChatApp(),
       create: (context) => ThemeProvider(),
     ),
   );
 }
 
 class ChatApp extends StatelessWidget {
-  const ChatApp({super.key});
+  ChatApp({super.key});
+  final User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class ChatApp extends StatelessWidget {
         AccountView.id: (context) => AccountView(),
       },
 
-      initialRoute: SignIn.id,
+      initialRoute: user?.email == null ? SignIn.id : HomeView.id,
     );
   }
 }

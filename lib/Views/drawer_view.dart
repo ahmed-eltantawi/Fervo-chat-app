@@ -2,6 +2,7 @@ import 'package:chat_with_me_now/Views/acount_view.dart';
 import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Views/settings_view.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DrawerView extends StatelessWidget {
@@ -36,6 +37,16 @@ class DrawerView extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pushNamed(context, AccountView.id);
+              },
+              child: ListTile(
+                title: Text('A C C O U N T'),
+                leading: Icon(Icons.person_4),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -51,24 +62,15 @@ class DrawerView extends StatelessWidget {
               ),
             ),
 
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AccountView.id);
-              },
-              child: ListTile(
-                title: Text('A C C O U N T'),
-                leading: Icon(Icons.person_4),
-              ),
-            ),
             Spacer(flex: 1),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   SignIn.id,
                   (route) => false,
                 );
+                await FirebaseAuth.instance.signOut();
               },
 
               child: ListTile(

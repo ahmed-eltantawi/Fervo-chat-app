@@ -1,5 +1,6 @@
 import 'package:chat_with_me_now/Views/chat_view.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FriendWidget extends StatelessWidget {
@@ -7,11 +8,17 @@ class FriendWidget extends StatelessWidget {
 
   final FriendModel friendModel;
   late String chatId;
-
+  late String? userEmail;
   @override
   Widget build(BuildContext context) {
-    String userEmail = ModalRoute.of(context)!.settings.arguments as String;
+    // String userEmail = ModalRoute.of(context)!.settings.arguments as String;
 
+    try {
+      userEmail = ModalRoute.of(context)!.settings.arguments as String;
+    } catch (e) {
+      User? user = FirebaseAuth.instance.currentUser;
+      userEmail = user?.email;
+    }
     var circleAvatar = CircleAvatar(
       backgroundColor: Theme.of(context).colorScheme.secondary,
 
@@ -31,13 +38,13 @@ class FriendWidget extends StatelessWidget {
     );
     return GestureDetector(
       onTap: () {
-        getChatId(userEmail);
+        getChatId(userEmail!);
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
               return ChatViewBetweenTwo(
-                email: userEmail,
+                email: userEmail!,
                 chatId: chatId,
                 friendName: friendModel.name,
                 friendImage: circleAvatar,

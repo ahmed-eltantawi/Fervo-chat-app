@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<bool> isThisEmailExists(String email) async {
@@ -11,7 +9,6 @@ Future<bool> isThisEmailExists(String email) async {
 
     return querySnapshot.docs.isNotEmpty;
   } catch (e) {
-    log("Error checking email: ${e.toString()}");
     return false;
   }
 }
