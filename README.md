@@ -1,4 +1,4 @@
-<![CDATA[# 🔥 Fervo Chat
+# 🔥 Fervo Chat
 
 <p align="center">
   <img src="assets/images/splash.png" alt="Fervo Chat Logo" width="200"/>
@@ -142,6 +142,7 @@ lib/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Flutter SDK `^3.10.7`
 - Firebase project configured (Android & iOS)
 - Google & Facebook developer accounts (for social sign-in)
@@ -183,11 +184,12 @@ lib/
 ### Firestore Collections
 
 | Collection | Document Fields |
-|------------|----------------|
+|------------|-----------------|
 | `users` | `name`, `id` (email), `image`, `createdAt` |
 | `{chatId}` | `text`, `id` (sender email), `createdAt` |
 
 ### Authentication Providers
+
 - ✅ Email/Password
 - ✅ Google
 - ✅ Facebook
@@ -199,65 +201,98 @@ lib/
 This project was a significant learning experience where I explored and applied many important technologies and concepts in Flutter development:
 
 ### 🔥 Firebase (Core Focus)
-- **Firebase Core** — Setting up and initializing Firebase in a Flutter project
-- **Firebase Authentication** — Implementing multiple sign-in methods (Email/Password, Google, Facebook)
-- **Cloud Firestore** — Using Firestore as a real-time NoSQL database for storing messages and user data
-- **Firestore Streams** — Using `StreamBuilder` with Firestore `snapshots()` for real-time data updates
-- **Firestore Queries** — Ordering, filtering, and limiting data from collections
-- **User Session Management** — Checking `FirebaseAuth.instance.currentUser` to maintain login state
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Firebase Core** | Setting up and initializing Firebase in a Flutter project |
+| **Firebase Auth** | Implementing multiple sign-in methods (Email/Password, Google, Facebook) |
+| **Cloud Firestore** | Using Firestore as a real-time NoSQL database for messages and user data |
+| **Firestore Streams** | Using `StreamBuilder` with Firestore `snapshots()` for real-time updates |
+| **Firestore Queries** | Ordering, filtering, and limiting data from collections |
+| **Session Management** | Checking `FirebaseAuth.instance.currentUser` to maintain login state |
 
 ### 🔑 OTP (One-Time Password) Verification
-- **Email OTP** — Sending a 4-digit verification code to user's email during registration
-- **SMTP Configuration** — Setting up Gmail SMTP server for sending OTP emails
-- **OTP Verification Flow** — Building a complete OTP input UI with auto-focus navigation between digit fields
-- **Resend OTP** — Implementing the ability to resend the verification code
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Email OTP** | Sending a 4-digit verification code to user's email during registration |
+| **SMTP Config** | Setting up Gmail SMTP server for sending OTP emails |
+| **OTP UI Flow** | Building a complete OTP input UI with auto-focus between digit fields |
+| **Resend OTP** | Implementing the ability to resend the verification code |
 
 ### 📳 Vibration / Haptic Feedback
-- **Vibration Plugin** — Adding physical feedback (vibration) when errors occur
-- **Platform Check** — Using `Vibration.hasVibrator()` to check device capability before triggering vibration
-- **UX Enhancement** — Providing tactile feedback on validation errors, wrong credentials, and network issues
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Vibration Plugin** | Adding physical feedback (vibration) when errors occur |
+| **Platform Check** | Using `Vibration.hasVibrator()` to check device capability first |
+| **UX Enhancement** | Providing tactile feedback on validation errors and network issues |
 
 ### 🎬 Splash Screen
-- **Flutter Native Splash** — Configuring a custom native splash screen with brand colors and logo
-- **Android 12+ Support** — Handling the new Android 12 splash screen API
-- **Fullscreen Mode** — Making the splash screen cover the entire display
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Native Splash** | Configuring a custom native splash screen with brand colors and logo |
+| **Android 12+** | Handling the new Android 12 splash screen API |
+| **Fullscreen Mode** | Making the splash screen cover the entire display |
 
 ### 🔐 Social Authentication
-- **Google Sign-In** — Full OAuth flow with `google_sign_in` package, including credential exchange with Firebase
-- **Facebook Sign-In** — Facebook Login integration using `flutter_facebook_auth`, with error handling for duplicate accounts
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Google Sign-In** | Full OAuth flow with `google_sign_in`, including credential exchange with Firebase |
+| **Facebook Sign-In** | Facebook Login with `flutter_facebook_auth`, with duplicate account error handling |
 
 ### 🎨 State Management
-- **Provider** — Using `ChangeNotifierProvider` for theme management across the app
-- **BLoC Pattern** — Understanding the BLoC architecture for scalable state management
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Provider** | Using `ChangeNotifierProvider` for theme management across the app |
+| **BLoC Pattern** | Understanding the BLoC architecture for scalable state management |
 
 ### 🌗 Theming System
-- **Dark & Light Mode** — Building a complete theme switching system
-- **ThemeData** — Creating custom `ThemeData` for both dark and light modes
-- **Dynamic Theme Toggle** — Using `CupertinoSwitch` with Provider to switch themes at runtime
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Dark & Light Mode** | Building a complete theme switching system |
+| **ThemeData** | Creating custom `ThemeData` for both dark and light modes |
+| **Dynamic Toggle** | Using `CupertinoSwitch` with Provider to switch themes at runtime |
 
 ### 🎞 Lottie Animations
-- **JSON Animations** — Using Lottie for lightweight, scalable animations
-- **Conditional Animations** — Swapping animation files based on app state (success/error)
-- **Non-repeating Animations** — Controlling animation playback behavior
+
+| Topic | What I Learned |
+|-------|----------------|
+| **JSON Animations** | Using Lottie for lightweight, scalable animations |
+| **Conditional Swap** | Swapping animation files based on app state (success/error) |
+| **Playback Control** | Controlling animation repeat and playback behavior |
 
 ### 🌐 Internet Connectivity
-- **Connection Checker** — Verifying internet connectivity before making network requests
-- **User Feedback** — Showing appropriate error messages when offline
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Connection Checker** | Verifying internet connectivity before making network requests |
+| **User Feedback** | Showing appropriate error messages when offline |
 
 ### ✅ Form Validation
-- **Email Validation** — Using `email_validator` for real-time email format checking
-- **Form Keys** — Using `GlobalKey<FormState>` for form validation
-- **Custom Validators** — Input validation with user-friendly error messages
+
+| Topic | What I Learned |
+|-------|----------------|
+| **Email Validation** | Using `email_validator` for real-time email format checking |
+| **Form Keys** | Using `GlobalKey<FormState>` for form validation |
+| **Custom Validators** | Input validation with user-friendly error messages |
 
 ### 🧩 Other Skills Applied
-- **Custom Fonts** — Integrating the Pacifico font family for branding
-- **Custom App Icon** — Using `flutter_launcher_icons` for branded app icons
-- **Named Routes** — Implementing clean navigation architecture
-- **Reusable Widgets** — Building reusable components (buttons, text fields, chat bubbles)
-- **Data Models** — Creating model classes with factory constructors for JSON parsing
-- **Extensions** — Writing Dart string extensions (e.g., capitalize)
-- **Error Handling** — Comprehensive try-catch with specific Firebase error codes
-- **Modal Progress HUD** — Showing loading overlays during async operations
+
+| Skill | Details |
+|-------|---------|
+| **Custom Fonts** | Integrating the Pacifico font family for branding |
+| **Custom App Icon** | Using `flutter_launcher_icons` for branded app icons |
+| **Named Routes** | Implementing clean navigation architecture |
+| **Reusable Widgets** | Building reusable components (buttons, text fields, chat bubbles) |
+| **Data Models** | Creating model classes with factory constructors for JSON parsing |
+| **Extensions** | Writing Dart string extensions (e.g., capitalize) |
+| **Error Handling** | Comprehensive try-catch with specific Firebase error codes |
+| **Modal Progress HUD** | Showing loading overlays during async operations |
 
 ---
 
@@ -271,11 +306,6 @@ This project was a significant learning experience where I explored and applied 
 
 ---
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
 
 ## 👨‍💻 Developer
 
@@ -286,4 +316,3 @@ This project is open source and available under the [MIT License](LICENSE).
 <p align="center">
   Made with ❤️ using Flutter & Firebase
 </p>
-]]>
