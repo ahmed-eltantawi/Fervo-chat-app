@@ -306,11 +306,6 @@ This project was a significant learning experience where I explored and applied 
 
 ---
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
 
 ## 👨‍💻 Developer
 
