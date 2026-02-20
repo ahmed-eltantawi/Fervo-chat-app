@@ -1,6 +1,7 @@
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
-import 'package:chat_with_me_now/auth/register_function.dart';
+import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
+import 'package:chat_with_me_now/auth/register_function.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,15 +72,19 @@ class _OTPViewState extends State<OTPView> {
                     ),
                   ),
                   Text(
-                    'We just sent an email',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    "Verify it's you",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(height: 10),
                   Text(
-                    'Enter the security code we sent to:',
+                    "We've sent a 4-digit code to",
                     style: TextStyle(fontSize: 16),
                   ),
 
-                  Text(widget.email),
+                  Text(
+                    widget.email,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(height: 50),
                   Form(
                     child: Row(
@@ -115,11 +120,6 @@ class _OTPViewState extends State<OTPView> {
                       setState(() {
                         isLoading = true;
                       });
-
-                      //*===============================================
-                      // TODO: And try to inhace the Ui of the OTP view
-                      //*===============================================
-
                       var otp = '$pin1$pin2$pin3$pin4';
                       if (otp.contains('null')) {
                         setState(() {
@@ -149,17 +149,24 @@ class _OTPViewState extends State<OTPView> {
                   ),
                   SizedBox(height: 15),
                   GestureDetector(
-                    onTap: () {
-                      sendOtpCode();
+                    onTap: () async {
                       setState(() {
+                        if (image != 'assets/images/error x.json') {
+                          isLoading = true;
+                        }
                         image = 'assets/images/email sended.json';
+                      });
+                      await sendOtpCode();
+                      setState(() {
+                        isLoading = false;
                       });
                     },
                     child: Text(
-                      'Resend The verification Email',
+                      'Resend verification code',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
+                  SizedBox(height: 30),
                 ],
               ),
             ],
@@ -176,7 +183,21 @@ class _CustomTextOtp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.onPrimary,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: kPrimaryColor, width: 1.3),
+        color: Theme.of(context).colorScheme.onPrimary,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(
+              context,
+            ).colorScheme.primary.withValues(alpha: 0.13),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 0),
+          ),
+        ],
+      ),
       height: 68,
       width: 64,
       child: TextFormField(
@@ -196,7 +217,7 @@ class _CustomTextOtp extends StatelessWidget {
           hintText: '0',
           hintStyle: TextStyle(
             fontFamily: 'San Francisco',
-            color: Colors.grey.withOpacity(0.5),
+            color: kPrimaryColor.withOpacity(0.6),
           ),
 
           border: InputBorder.none,

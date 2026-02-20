@@ -1,3 +1,4 @@
+import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottom extends StatelessWidget {
@@ -10,13 +11,38 @@ class CustomBottom extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-
-          borderRadius: BorderRadius.circular(16),
+          color: kPrimaryColor,
+          boxShadow: [
+            BoxShadow(
+              color: kPrimaryColor.withValues(alpha: 0.3),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 1),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(50),
         ),
-        height: 45,
+        height: 70,
         width: double.infinity,
-        child: Center(child: Text(text, style: TextStyle(fontSize: 20))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 20,
+                color: Theme.of(context).colorScheme.surface,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(width: 10),
+            Icon(
+              Icons.arrow_forward_rounded,
+              size: 25,
+              color: Theme.of(context).colorScheme.surface,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -3,16 +3,18 @@ import 'package:chat_with_me_now/Views/register_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
+import 'package:chat_with_me_now/Widgets/horezantial_text_line.dart';
 import 'package:chat_with_me_now/auth/sing_in_methods.dart';
 import 'package:chat_with_me_now/auth/make_user_and_sing_in_function.dart';
+import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:chat_with_me_now/auth/user_login.dart';
+import 'package:chat_with_me_now/helper/vibration.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:vibration/vibration.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -31,6 +33,10 @@ class _SignInState extends State<SignIn> {
 
   bool isLoading = false;
 
+  bool passwordHide = true;
+
+  IconData passwordIcon = Icons.visibility_off_outlined;
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -46,36 +52,76 @@ class _SignInState extends State<SignIn> {
                 children: [
                   Column(
                     children: [
-                      SizedBox(height: 100),
+                      SizedBox(height: 50),
                       AppIconWidget(),
-                      SizedBox(height: 20),
+                      Text(
+                        'Enter your details to access your chats',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      SizedBox(height: 40),
                       Row(
                         children: [
-                          Text('Sign In', style: TextStyle(fontSize: 25)),
+                          Text('Email', style: TextStyle(fontSize: 17)),
                         ],
                       ),
-                      SizedBox(height: 10),
-
+                      SizedBox(height: 7),
                       CustomFormTextField(
+                        prefixIcon: Icons.email_outlined,
                         textInputAction: TextInputAction.next,
 
-                        hintText: 'Email',
+                        hintText: 'yourName@example.com',
                         onChanged: (value) {
                           email = value;
                         },
                       ),
-                      SizedBox(height: 15),
-                      CustomFormTextField(
-                        textInputAction: TextInputAction.done,
+                      SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Text('Password', style: TextStyle(fontSize: 17)),
+                        ],
+                      ),
+                      SizedBox(height: 7),
 
-                        hide: true,
-                        hintText: 'Password',
-                        onChanged: (value) {
-                          password = value;
-                        },
+                      Stack(
+                        alignment: AlignmentGeometry.centerRight,
+                        children: [
+                          CustomFormTextField(
+                            prefixIcon: Icons.lock_outlined,
+                            textInputAction: TextInputAction.done,
+
+                            hide: passwordHide,
+                            hintText: '********',
+                            onChanged: (value) {
+                              password = value;
+                            },
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              if (passwordIcon ==
+                                  Icons.visibility_off_outlined) {
+                                passwordIcon = Icons.remove_red_eye_outlined;
+                                passwordHide = false;
+                              } else {
+                                passwordIcon = Icons.visibility_off_outlined;
+                                passwordHide = true;
+                              }
+                              setState(() {
+                                passwordIcon;
+                                passwordHide;
+                              });
+                            },
+                            icon: Icon(
+                              passwordIcon,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ],
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: 50),
                       CustomBottom(
                         text: 'Sign In',
                         onTap: () async {
@@ -138,91 +184,106 @@ class _SignInState extends State<SignIn> {
                           }
                         },
                       ),
-                      SizedBox(height: 15),
-                      CustomBottom(
-                        text: 'Sign In with Google',
-                        onTap: () async {
-                          try {
-                            setState(() {
-                              isLoading = true;
-                            });
-                            await SignInMethods.google();
-                            User user = FirebaseAuth.instance.currentUser!;
-
-                            await makeUser(
-                              context,
-                              user.email,
-                              user.uid,
-                              user.displayName,
-                              image: user.photoURL,
-                            );
-                          } catch (e) {
-                            vibration();
-                            showSnackBar(
-                              context,
-                              'Wrong with Google sing in, try again',
-                            );
-                          }
-                          setState(() {
-                            isLoading = false;
-                          });
-                        },
-                      ),
-                      SizedBox(height: 15),
-
-                      CustomBottom(
-                        text: 'Sign In with Facebook',
-                        onTap: () async {
-                          try {
-                            setState(() {
-                              isLoading = true;
-                            });
-                            await SignInMethods.facebook();
-                            User user = FirebaseAuth.instance.currentUser!;
-                            await makeUser(
-                              context,
-                              user.email,
-                              user.uid,
-                              user.displayName,
-                              image: user.photoURL,
-                            );
-                          } catch (e) {
-                            vibration();
-                            if (e.toString() ==
-                                ' [firebase_auth/account-exists-with-different-credential] An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.') {
-                              showSnackBar(
-                                context,
-                                'This email is used before.',
-                              );
-                            } else {
-                              showSnackBar(
-                                context,
-                                'Wrong with Facebook sing in, try again',
-                              );
-                            }
-                          }
-                          setState(() {
-                            isLoading = false;
-                          });
-                        },
-                      ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 40),
+                      HorizontalTextLine(text: 'Or continue with'),
+                      SizedBox(height: 30),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Don't Have an account?  ", style: TextStyle()),
+                          singInIcons(
+                            image: 'assets/images/google icon.png',
+                            onTap: () async {
+                              try {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                await SignInMethods.google();
+                                User user = FirebaseAuth.instance.currentUser!;
+
+                                await makeUser(
+                                  context,
+                                  user.email,
+                                  user.uid,
+                                  user.displayName,
+                                  image: user.photoURL,
+                                );
+                              } catch (e) {
+                                vibration();
+                                showSnackBar(
+                                  context,
+                                  'Wrong with Google sing in, try again',
+                                );
+                              }
+                              setState(() {
+                                isLoading = false;
+                              });
+                            },
+                          ),
+                          SizedBox(width: 20),
+                          singInIcons(
+                            image: 'assets/images/facebook-icon.png',
+                            onTap: () async {
+                              try {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                await SignInMethods.facebook();
+                                User user = FirebaseAuth.instance.currentUser!;
+                                await makeUser(
+                                  context,
+                                  user.email,
+                                  user.uid,
+                                  user.displayName,
+                                  image: user.photoURL,
+                                );
+                              } catch (e) {
+                                vibration();
+                                if (e.toString() ==
+                                    ' [firebase_auth/account-exists-with-different-credential] An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.') {
+                                  showSnackBar(
+                                    context,
+                                    'This email is used before.',
+                                  );
+                                } else {
+                                  showSnackBar(
+                                    context,
+                                    'Wrong with Facebook sing in, try again',
+                                  );
+                                }
+                              }
+                              setState(() {
+                                isLoading = false;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 50),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account?  ",
+                            style: TextStyle(fontSize: 18),
+                          ),
                           GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(context, RegisterView.id);
                             },
                             child: Text(
-                              "Register",
-                              style: TextStyle(fontWeight: FontWeight.w700),
+                              "Sing Up",
+                              style: TextStyle(
+                                color: kPrimaryColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
                       ),
+                      SizedBox(height: 30),
                     ],
                   ),
                 ],
@@ -233,10 +294,42 @@ class _SignInState extends State<SignIn> {
       ),
     );
   }
+}
 
-  void vibration() async {
-    if (await Vibration.hasVibrator()) {
-      Vibration.vibrate();
-    }
+class singInIcons extends StatelessWidget {
+  const singInIcons({super.key, required this.image, required this.onTap});
+  final String image;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        clipBehavior: Clip.antiAlias,
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.13),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 1),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(200),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(200),
+          ),
+          margin: EdgeInsets.all(.4),
+          child: Image.asset(image),
+        ),
+      ),
+    );
   }
 }

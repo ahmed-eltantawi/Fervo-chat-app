@@ -49,13 +49,13 @@ class ChatApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
+
       routes: {
         SignIn.id: (context) => SignIn(),
         RegisterView.id: (context) => RegisterView(),
         HomeView.id: (context) => HomeView(),
         AccountView.id: (context) => AccountView(),
       },
-
       initialRoute: user?.email == null ? SignIn.id : HomeView.id,
     );
   }

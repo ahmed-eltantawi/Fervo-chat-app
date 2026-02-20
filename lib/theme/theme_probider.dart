@@ -3,7 +3,7 @@ import 'package:chat_with_me_now/theme/light_mode_theme.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeData _themeData = darkMode;
+  ThemeData _themeData = lightMode;
   ThemeData get themeData => _themeData;
   bool get isDarkMode => _themeData == darkMode;
 

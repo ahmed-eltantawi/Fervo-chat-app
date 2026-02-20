@@ -1,75 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Data Deletion - fervo</title>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            margin: 40px auto; 
-            max-width: 700px; 
-            padding: 0 20px; 
-            color: #333; 
-            background-color: #f9f9f9;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 { 
-            color: #1877f2;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        h2 { 
-            color: #444; 
-            margin-top: 20px; 
-        }
-        p { 
-            margin-bottom: 15px; 
-            font-size: 1.05em;
-        }
-        ol { 
-            margin-bottom: 20px; 
-            padding-left: 20px;
-        }
-        li { 
-            margin-bottom: 12px; 
-            font-size: 1.05em;
-        }
-        .footer { 
-            margin-top: 40px; 
-            font-size: 0.9em; 
-            color: #777; 
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Your Data – Fervo</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --surface: #ffffff;
+      --accent: #2d6a4f;
+      --accent-light: #e8f5ee;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+      margin-bottom: 36px;
+      font-weight: 500;
+      transition: gap 0.2s;
+    }
+
+    .back-link:hover { gap: 10px; }
+
+    /* Header */
+    header {
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .app-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Info card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    .card p {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: #374151;
+    }
+
+    /* Steps */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .steps li:last-child { border-bottom: none; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .step-num::before { content: counter(step); }
+
+    .step-text {
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: #374151;
+    }
+
+    .step-text strong { color: var(--text); }
+
+    /* Success badge */
+    .success-step .step-num {
+      background: #059669;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
+<div class="wrapper">
 
-    <div class="container">
-        <h1>User Data Deletion Instructions</h1>
-        
-        <p><strong>fervo</strong>, developed by Ahmed eltantawi, does not save your personal data on our servers. However, according to Facebook policy, we have to provide User Data Deletion Callback URL or Data Deletion Instructions URL.</p>
+  <a href="index.html" class="back-link">← Privacy Policy</a>
 
-        <p>If you want to delete your activities for the app, you can remove your information by following these steps:</p>
+  <header>
+    <div class="app-badge">Fervo App</div>
+    <h1>Delete Your Data</h1>
+    <p class="subtitle"><strong>Fervo</strong> does not save your personal data on our servers. However, per Facebook policy, we provide these instructions to remove your connected app activity.</p>
+  </header>
 
-        <ol>
-            <li>Go to your Facebook Account's <strong>"Settings & Privacy"</strong>. Click <strong>"Settings"</strong>.</li>
-            <li>Look for <strong>"Apps and Websites"</strong> and you will see all of the apps and websites you linked with your Facebook.</li>
-            <li>Search and Click on <strong>"fervo"</strong> in the search bar.</li>
-            <li>Scroll and click <strong>"Remove"</strong>.</li>
-            <li>Congratulations, you have successfully removed your app activities.</li>
-        </ol>
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <div class="step-num"></div>
+        <div class="step-text">Go to your Facebook Account's <strong>"Settings &amp; Privacy"</strong>, then click <strong>"Settings"</strong>.</div>
+      </li>
+      <li>
+        <div class="step-num"></div>
+        <div class="step-text">Find <strong>"Apps and Websites"</strong> — this shows all apps and websites linked to your Facebook account.</div>
+      </li>
+      <li>
+        <div class="step-num"></div>
+        <div class="step-text">Search for <strong>"Fervo"</strong> in the search bar and click on it.</div>
+      </li>
+      <li>
+        <div class="step-num"></div>
+        <div class="step-text">Scroll down and click <strong>"Remove"</strong>.</div>
+      </li>
+      <li class="success-step">
+        <div class="step-num"></div>
+        <div class="step-text">✓ &nbsp;You have successfully removed your Fervo app activity from Facebook.</div>
+      </li>
+    </ol>
+  </div>
 
-        <div class="footer">
-            <p>&copy; 2026 Ahmed Eltantawi. All rights reserved.</p>
-        </div>
-    </div>
+  <footer>
+    <p>© 2026 Ahmed Eltantawi. All rights reserved.</p>
+  </footer>
 
+</div>
 </body>
 </html>

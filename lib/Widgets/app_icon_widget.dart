@@ -8,17 +8,40 @@ class AppIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CircleAvatar(backgroundImage: AssetImage(kAppIcon), radius: 80),
+        Container(
+          clipBehavior: Clip.antiAlias,
+          height: 90,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: kPrimaryColor.withValues(alpha: 0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 1),
+              ),
+            ],
+            borderRadius: BorderRadius.circular(35),
+          ),
+          child: Image.asset(kAppIcon),
+        ),
         SizedBox(height: 10),
         Text(
           'Fervo Chat',
           style: TextStyle(
-            fontSize: 32,
-            color: Colors.white,
+            fontSize: 35,
+            color: kPrimaryColor,
             fontFamily: 'Pacifico',
           ),
         ),
-        SizedBox(height: 20),
+        // Text(
+        //   'Fervo Chat',
+        //   style: TextStyle(
+        //     fontWeight: FontWeight.bold,
+        //     fontSize: 45,
+        //     color: kPrimaryColor,
+        //   ),
+        // ),
+        SizedBox(height: 10),
       ],
     );
   }

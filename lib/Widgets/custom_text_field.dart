@@ -7,7 +7,9 @@ class CustomFormTextField extends StatelessWidget {
     this.onChanged,
     this.hide = false,
     required this.textInputAction,
+    required this.prefixIcon,
   });
+  final IconData prefixIcon;
   final String hintText;
   final Function(String)? onChanged;
   final bool hide;
@@ -16,7 +18,7 @@ class CustomFormTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(15),
         color: Theme.of(context).colorScheme.tertiary,
       ),
       child: TextFormField(
@@ -34,6 +36,10 @@ class CustomFormTextField extends StatelessWidget {
         },
         onChanged: onChanged,
         decoration: InputDecoration(
+          prefixIcon: Icon(
+            prefixIcon,
+            color: Theme.of(context).colorScheme.primary,
+          ),
           border: InputBorder.none,
 
           focusedBorder: OutlineInputBorder(
@@ -42,7 +48,7 @@ class CustomFormTextField extends StatelessWidget {
               width: 2,
             ),
           ),
-          contentPadding: EdgeInsets.only(left: 15),
+          contentPadding: EdgeInsets.only(left: 15, top: 15, bottom: 15),
           hint: Text(
             hintText,
             style: TextStyle(

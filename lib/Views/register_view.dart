@@ -2,16 +2,19 @@ import 'package:chat_with_me_now/Views/error_view.dart';
 import 'package:chat_with_me_now/Views/otp_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
+import 'package:chat_with_me_now/Widgets/custom_check_box.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
+import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/auth/isTheEmailExists.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
+import 'package:chat_with_me_now/helper/vibration.dart';
+import 'package:chat_with_me_now/helper/web_view.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:vibration/vibration.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -30,12 +33,18 @@ class _RegisterViewState extends State<RegisterView> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool isLoading = false;
+  bool passwordHide = true;
+  bool isCheckBoxClicked = false;
+  bool showErrorOfCheckBox = false;
+
+  IconData showAndHidePasswordIcon = Icons.visibility_off_outlined;
 
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
+        appBar: AppBar(),
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: Center(
           child: Padding(
@@ -44,128 +53,256 @@ class _RegisterViewState extends State<RegisterView> {
               key: formKey,
               child: ListView(
                 children: [
-                  SizedBox(height: 100),
+                  SizedBox(height: 20),
                   AppIconWidget(),
-                  Row(
-                    children: [
-                      Text('Register', style: TextStyle(fontSize: 25)),
-                    ],
+                  Center(
+                    child: Text(
+                      'Create your distraction-free chats today',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
                   ),
-                  Column(
+                  SizedBox(height: 30),
+                  Text('Full Name', style: TextStyle(fontSize: 17)),
+                  CustomFormTextField(
+                    prefixIcon: Icons.person_outlined,
+                    textInputAction: TextInputAction.next,
+                    hintText: 'Your Name',
+                    onChanged: (value) {
+                      userName = value.capitalize();
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  Text('Email', style: TextStyle(fontSize: 17)),
+                  CustomFormTextField(
+                    prefixIcon: Icons.email_outlined,
+                    textInputAction: TextInputAction.next,
+                    hintText: 'Email',
+                    onChanged: (value) {
+                      email = value.toLowerCase();
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  Text('Password', style: TextStyle(fontSize: 17)),
+                  Stack(
+                    alignment: AlignmentGeometry.centerRight,
                     children: [
-                      SizedBox(height: 10),
                       CustomFormTextField(
-                        textInputAction: TextInputAction.next,
-                        hintText: 'Your Name',
-                        onChanged: (value) {
-                          userName = value.capitalize();
-                        },
-                      ),
-                      SizedBox(height: 15),
-                      CustomFormTextField(
-                        textInputAction: TextInputAction.next,
-                        hintText: 'Email',
-                        onChanged: (value) {
-                          email = value.toLowerCase();
-                        },
-                      ),
-                      SizedBox(height: 15),
-                      CustomFormTextField(
+                        prefixIcon: Icons.lock_outlined,
                         textInputAction: TextInputAction.done,
-                        hide: true,
-                        hintText: 'Password',
+                        hide: passwordHide,
+                        hintText: '********',
                         onChanged: (value) {
                           password = value;
                         },
                       ),
+
+                      IconButton(
+                        onPressed: () {
+                          if (showAndHidePasswordIcon ==
+                              Icons.visibility_off_outlined) {
+                            showAndHidePasswordIcon =
+                                Icons.remove_red_eye_outlined;
+                            passwordHide = false;
+                          } else {
+                            showAndHidePasswordIcon =
+                                Icons.visibility_off_outlined;
+                            passwordHide = true;
+                          }
+                          setState(() {
+                            showAndHidePasswordIcon;
+                            passwordHide;
+                          });
+                        },
+                        icon: Icon(
+                          showAndHidePasswordIcon,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(height: 20),
-                  CustomBottom(
-                    text: 'Register',
-                    onTap: () async {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      final bool isConnected =
-                          await InternetConnection().hasInternetAccess;
-                      if (!isConnected) {
-                        showSnackBar(context, 'No internet connection.');
-                        vibration();
-                      } else {
-                        if (formKey.currentState!.validate()) {
-                          if (!EmailValidator.validate(email!)) {
-                            vibration();
 
-                            showSnackBar(
-                              context,
-                              'Email is not valid email, try To enter a right one',
-                            );
-                          }
-
-                          if (await isThisEmailExists(email!)) {
-                            vibration();
-                            showSnackBar(
-                              context,
-                              "This Email ID already Associated with Another Account.",
-                            );
-                          } else {
-                            try {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return OTPView(
-                                      email: email!,
-                                      password: password!,
-                                      userName: userName!,
-                                    );
-                                  },
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isCheckBoxClicked = !isCheckBoxClicked;
+                          });
+                        },
+                        child: CustomCheckbox(
+                          showErrorOfCheckBox: showErrorOfCheckBox,
+                          value: isCheckBoxClicked,
+                          onChanged: (value) {
+                            setState(() {
+                              isCheckBoxClicked = value ?? false;
+                            });
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          children: [
+                            Text('I agree to the '),
+                            GestureDetector(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return WebView(
+                                        url:
+                                            'https://fervo-ahemdeltantawi.netlify.app/',
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Terms & Conditions',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kPrimaryColor,
                                 ),
-                              );
-                            } on FirebaseAuthException catch (e) {
-                              vibration();
+                              ),
+                            ),
+                            Text(' and '),
+                            GestureDetector(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return WebView(
+                                        url:
+                                            'https://fervo-ahemdeltantawi.netlify.app/deleating-user-info',
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Privacy Policy',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kPrimaryColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
 
-                              if (e.code == 'weak-password') {
-                                showSnackBar(
-                                  context,
-                                  'The password provided is too weak.',
-                                );
-                              } else if (e.code == 'email-already-in-use') {
-                                showSnackBar(
-                                  context,
-                                  'The account already exists for that email.',
-                                );
-                              }
-                            } catch (e) {
+                  SizedBox(height: 20),
+                  CustomBottom(
+                    text: 'Create Account',
+                    onTap: () async {
+                      if (isCheckBoxClicked) {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        final bool isConnected =
+                            await InternetConnection().hasInternetAccess;
+                        if (!isConnected) {
+                          showSnackBar(context, 'No internet connection.');
+                          vibration();
+                        } else {
+                          if (formKey.currentState!.validate()) {
+                            if (!EmailValidator.validate(email!)) {
                               vibration();
 
                               showSnackBar(
                                 context,
-                                'There some thing Wrong, please try again',
+                                'Email is not valid email, try To enter a right one',
                               );
+                              setState(() {
+                                isLoading = false;
+                              });
+                              return;
                             }
+
+                            if (await isThisEmailExists(email!)) {
+                              vibration();
+                              showSnackBar(
+                                context,
+                                "This Email ID already Associated with Another Account.",
+                              );
+                            } else {
+                              try {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return OTPView(
+                                        email: email!,
+                                        password: password!,
+                                        userName: userName!,
+                                      );
+                                    },
+                                  ),
+                                );
+                              } on FirebaseAuthException catch (e) {
+                                vibration();
+
+                                if (e.code == 'weak-password') {
+                                  showSnackBar(
+                                    context,
+                                    'The password provided is too weak.',
+                                  );
+                                } else if (e.code == 'email-already-in-use') {
+                                  showSnackBar(
+                                    context,
+                                    'The account already exists for that email.',
+                                  );
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                  return;
+                                }
+                              } catch (e) {
+                                vibration();
+
+                                showSnackBar(
+                                  context,
+                                  'There some thing Wrong, please try again',
+                                );
+                              }
+                            }
+                          } else if (email != null &&
+                              userName != null &&
+                              password != null) {
+                            vibration();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ErrorView();
+                                },
+                              ),
+                            );
                           }
-                        } else if (email != null &&
-                            userName != null &&
-                            password != null) {
-                          vibration();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return ErrorView();
-                              },
-                            ),
-                          );
                         }
+                        setState(() {
+                          isLoading = false;
+                        });
+                      } else {
+                        showSnackBar(
+                          context,
+                          "Please confirm the terms & conditions",
+                        );
+                        setState(() {
+                          showErrorOfCheckBox = true;
+                        });
                       }
-                      setState(() {
-                        isLoading = false;
-                      });
                     },
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -181,6 +318,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 30),
                 ],
               ),
             ),
@@ -188,11 +326,5 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
-  }
-
-  void vibration() async {
-    if (await Vibration.hasVibrator()) {
-      Vibration.vibrate();
-    }
   }
 }
