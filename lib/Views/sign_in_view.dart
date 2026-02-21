@@ -4,7 +4,7 @@ import 'package:chat_with_me_now/Views/reset_password_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
-import 'package:chat_with_me_now/Widgets/horezantial_text_line.dart';
+import 'package:chat_with_me_now/Widgets/horizontal_text_line.dart';
 import 'package:chat_with_me_now/auth/sing_in_methods.dart';
 import 'package:chat_with_me_now/auth/make_user_and_sing_in_function.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
