@@ -23,6 +23,27 @@
 **Fervo Chat** is a feature-rich, real-time messaging application developed using Flutter and powered by Firebase. It allows users to register, sign in using multiple authentication methods (Email/Password, Google, Facebook), verify their email via OTP, and chat with other users in real-time. The app supports dark and light themes, profile management, and provides a smooth, engaging user experience with Lottie animations and haptic feedback.
 
 ---
+## 📱 App Screenshots
+
+<table>
+  <tr>
+    <td align="center"><strong>Login Page</strong></td>
+    <td align="center"><strong>Register Page</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/login_view.png" alt="Login Page" width="300"/></td>
+    <td><img src="assets/screens/regester_view.png" alt="Register Page" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>OTP Verification</strong></td>
+    <td align="center"><strong>Forget Password</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/otp_view.png" alt="OTP Verification" width="300"/></td>
+    <td><img src="assets/screens/forget_password_view.png" alt="Forget Password" width="300"/></td>
+  </tr>
+</table>
+---
 
 ## ✨ Features
 
@@ -65,28 +86,7 @@
 - **Drawer Navigation** — Side menu with Home, Account, Settings, and Logout
 - **Named Routes** — Clean navigation with named route system
 
----
 
-## 📱 App Screenshots
-
-<table>
-  <tr>
-    <td align="center"><strong>Login Page</strong></td>
-    <td align="center"><strong>Register Page</strong></td>
-  </tr>
-  <tr>
-    <td><img src="assets/screens/login_view.png" alt="Login Page" width="300"/></td>
-    <td><img src="assets/screens/regester_view.png" alt="Register Page" width="300"/></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>OTP Verification</strong></td>
-    <td align="center"><strong>Forget Password</strong></td>
-  </tr>
-  <tr>
-    <td><img src="assets/screens/otp_view.png" alt="OTP Verification" width="300"/></td>
-    <td><img src="assets/screens/forget_password_view.png" alt="Forget Password" width="300"/></td>
-  </tr>
-</table>
 
 ---
 
