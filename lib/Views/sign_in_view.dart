@@ -139,76 +139,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 40),
                       HorizontalTextLine(text: 'Or continue with'),
                       SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          singInIcons(
-                            image: 'assets/images/google icon.png',
-                            onTap: () async {
-                              try {
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                await SignInMethods.google();
-                                User user = FirebaseAuth.instance.currentUser!;
-                                await makeUser(
-                                  context,
-                                  user.email,
-                                  user.uid,
-                                  user.displayName,
-                                  image: user.photoURL,
-                                );
-                              } catch (e) {
-                                vibration();
-                                showSnackBar(
-                                  context,
-                                  'Wrong with Google sing in, try again',
-                                );
-                              }
-                              setState(() {
-                                isLoading = false;
-                              });
-                            },
-                          ),
-                          SizedBox(width: 20),
-                          singInIcons(
-                            image: 'assets/images/facebook-icon.png',
-                            onTap: () async {
-                              try {
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                await SignInMethods.facebook();
-                                User user = FirebaseAuth.instance.currentUser!;
-                                await makeUser(
-                                  context,
-                                  user.email,
-                                  user.uid,
-                                  user.displayName,
-                                  image: user.photoURL,
-                                );
-                              } catch (e) {
-                                vibration();
-                                if (e.toString() ==
-                                    ' [firebase_auth/account-exists-with-different-credential] An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.') {
-                                  showSnackBar(
-                                    context,
-                                    'This email is used before.',
-                                  );
-                                } else {
-                                  showSnackBar(
-                                    context,
-                                    'Wrong with Facebook sing in, try again',
-                                  );
-                                }
-                              }
-                              setState(() {
-                                isLoading = false;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
+                      googleAndFacebookSingIn(context),
                       SizedBox(height: 50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -241,6 +172,70 @@ class _SignInState extends State<SignIn> {
           ),
         ),
       ),
+    );
+  }
+
+  Row googleAndFacebookSingIn(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        singInIcons(
+          image: 'assets/images/google icon.png',
+          onTap: () async {
+            try {
+              setState(() {
+                isLoading = true;
+              });
+              await SignInMethods.google();
+              User user = FirebaseAuth.instance.currentUser!;
+              await makeUser(
+                context,
+                user.email,
+                user.uid,
+                user.displayName,
+                image: user.photoURL,
+              );
+            } catch (e) {
+              vibration();
+              showSnackBar(context, 'Wrong with Google sing in, try again');
+            }
+            setState(() {
+              isLoading = false;
+            });
+          },
+        ),
+        SizedBox(width: 20),
+        singInIcons(
+          image: 'assets/images/facebook-icon.png',
+          onTap: () async {
+            try {
+              setState(() {
+                isLoading = true;
+              });
+              await SignInMethods.facebook();
+              User user = FirebaseAuth.instance.currentUser!;
+              await makeUser(
+                context,
+                user.email,
+                user.uid,
+                user.displayName,
+                image: user.photoURL,
+              );
+            } catch (e) {
+              vibration();
+              if (e.toString() ==
+                  ' [firebase_auth/account-exists-with-different-credential] An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.') {
+                showSnackBar(context, 'This email is used before.');
+              } else {
+                showSnackBar(context, 'Wrong with Facebook sing in, try again');
+              }
+            }
+            setState(() {
+              isLoading = false;
+            });
+          },
+        ),
+      ],
     );
   }
 
@@ -281,11 +276,11 @@ class _SignInState extends State<SignIn> {
           }
         }
       }
-      if (!mounted) return;
-      setState(() {
-        isLoading = false;
-      });
     }
+    if (!mounted) return;
+    setState(() {
+      isLoading = false;
+    });
   }
 }
 

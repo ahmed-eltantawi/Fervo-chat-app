@@ -67,6 +67,29 @@
 
 ---
 
+## 📱 App Screenshots
+
+<table>
+  <tr>
+    <td align="center"><strong>Login Page</strong></td>
+    <td align="center"><strong>Register Page</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/login_view.png" alt="Login Page" width="300"/></td>
+    <td><img src="assets/screens/regester_view.png" alt="Register Page" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>OTP Verification</strong></td>
+    <td align="center"><strong>Forget Password</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/otp_view.png" alt="OTP Verification" width="300"/></td>
+    <td><img src="assets/screens/forget_password_view.png" alt="Forget Password" width="300"/></td>
+  </tr>
+</table>
+
+---
+
 ## 🏗 Project Structure
 
 ```
