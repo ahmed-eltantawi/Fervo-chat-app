@@ -65,8 +65,8 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                   ),
                   SizedBox(height: 30),
-                  Text('Full Name', style: TextStyle(fontSize: 17)),
                   CustomFormTextField(
+                    label: 'Full Name',
                     prefixIcon: Icons.person_outlined,
                     textInputAction: TextInputAction.next,
                     hintText: 'Your Name',
@@ -75,8 +75,8 @@ class _RegisterViewState extends State<RegisterView> {
                     },
                   ),
                   SizedBox(height: 20),
-                  Text('Email', style: TextStyle(fontSize: 17)),
                   CustomFormTextField(
+                    label: 'Email',
                     prefixIcon: Icons.email_outlined,
                     textInputAction: TextInputAction.next,
                     hintText: 'Email',
@@ -85,11 +85,11 @@ class _RegisterViewState extends State<RegisterView> {
                     },
                   ),
                   SizedBox(height: 20),
-                  Text('Password', style: TextStyle(fontSize: 17)),
                   Stack(
-                    alignment: AlignmentGeometry.centerRight,
+                    alignment: AlignmentGeometry.xy(1, .8),
                     children: [
                       CustomFormTextField(
+                        label: 'Password',
                         prefixIcon: Icons.lock_outlined,
                         textInputAction: TextInputAction.done,
                         hide: passwordHide,

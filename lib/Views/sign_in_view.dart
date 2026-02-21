@@ -1,5 +1,6 @@
 import 'package:chat_with_me_now/Views/home_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
+import 'package:chat_with_me_now/Views/reset_password_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
@@ -62,36 +63,23 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       SizedBox(height: 40),
-                      Row(
-                        children: [
-                          Text('Email', style: TextStyle(fontSize: 17)),
-                        ],
-                      ),
-                      SizedBox(height: 7),
                       CustomFormTextField(
+                        label: 'Email',
                         prefixIcon: Icons.email_outlined,
                         textInputAction: TextInputAction.next,
-
                         hintText: 'yourName@example.com',
                         onChanged: (value) {
-                          email = value;
+                          email = value.toLowerCase();
                         },
                       ),
                       SizedBox(height: 30),
-                      Row(
-                        children: [
-                          Text('Password', style: TextStyle(fontSize: 17)),
-                        ],
-                      ),
-                      SizedBox(height: 7),
-
                       Stack(
-                        alignment: AlignmentGeometry.centerRight,
+                        alignment: AlignmentGeometry.xy(1, .8),
                         children: [
                           CustomFormTextField(
+                            label: 'Password',
                             prefixIcon: Icons.lock_outlined,
                             textInputAction: TextInputAction.done,
-
                             hide: passwordHide,
                             hintText: '********',
                             onChanged: (value) {
@@ -120,74 +108,37 @@ class _SignInState extends State<SignIn> {
                           ),
                         ],
                       ),
-
-                      SizedBox(height: 50),
-                      CustomBottom(
-                        text: 'Sign In',
-                        onTap: () async {
-                          if (formKey.currentState!.validate()) {
-                            setState(() {
-                              isLoading = true;
-                            });
-                            final bool isConnected =
-                                await InternetConnection().hasInternetAccess;
-                            if (!isConnected) {
-                              showSnackBar(context, 'No internet connection.');
-                              vibration();
-                            } else {
-                              if (!EmailValidator.validate(email!)) {
-                                showSnackBar(
-                                  context,
-                                  'Email is not valid email, try To enter a right one',
-                                );
-                                vibration();
-                              } else {
-                                try {
-                                  await userLogin(context, email!, password!);
-                                  if (!mounted) return;
-                                  email = '';
-                                  password = '';
-                                  Navigator.pushNamed(
-                                    context,
-                                    HomeView.id,
-                                    arguments: email,
-                                  );
-                                } on FirebaseAuthException catch (e) {
-                                  vibration();
-
-                                  if (!mounted) return;
-                                  if (e.code == 'user-not-found') {
-                                    showSnackBar(
-                                      context,
-                                      'No user found for that email.',
-                                    );
-                                  } else if (e.code == 'invalid-credential') {
-                                    showSnackBar(
-                                      context,
-                                      'Wrong password provided for that user.',
-                                    );
-                                  }
-                                } catch (e) {
-                                  vibration();
-                                  showSnackBar(
-                                    context,
-                                    'There some thing Wrong, please try again',
-                                  );
-                                }
-                              }
-                            }
-                            if (!mounted) return;
-
-                            setState(() {
-                              isLoading = false;
-                            });
-                          }
-                        },
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return ResetPassword();
+                                  },
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                      SizedBox(height: 30),
+                      CustomBottom(text: 'Sign In', onTap: singInMethod),
                       SizedBox(height: 40),
                       HorizontalTextLine(text: 'Or continue with'),
                       SizedBox(height: 30),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -200,7 +151,6 @@ class _SignInState extends State<SignIn> {
                                 });
                                 await SignInMethods.google();
                                 User user = FirebaseAuth.instance.currentUser!;
-
                                 await makeUser(
                                   context,
                                   user.email,
@@ -259,7 +209,6 @@ class _SignInState extends State<SignIn> {
                           ),
                         ],
                       ),
-
                       SizedBox(height: 50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -293,6 +242,50 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  Future<dynamic> singInMethod() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (formKey.currentState!.validate()) {
+      final bool isConnected = await InternetConnection().hasInternetAccess;
+      if (!isConnected) {
+        showSnackBar(context, 'No internet connection.');
+        vibration();
+      } else {
+        if (!EmailValidator.validate(email!)) {
+          showSnackBar(
+            context,
+            'Email is not valid email, try To enter a right one',
+          );
+          vibration();
+        } else {
+          try {
+            await userLogin(context, email!, password!);
+            if (!mounted) return;
+            email = '';
+            password = '';
+            Navigator.pushNamed(context, HomeView.id, arguments: email);
+          } on FirebaseAuthException catch (e) {
+            vibration();
+            if (!mounted) return;
+            if (e.code == 'user-not-found') {
+              showSnackBar(context, 'No user found for that email.');
+            } else if (e.code == 'invalid-credential') {
+              showSnackBar(context, 'Wrong password provided for that user.');
+            }
+          } catch (e) {
+            vibration();
+            showSnackBar(context, 'There some thing Wrong, please try again');
+          }
+        }
+      }
+      if (!mounted) return;
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 }
 

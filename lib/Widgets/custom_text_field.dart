@@ -8,56 +8,64 @@ class CustomFormTextField extends StatelessWidget {
     this.hide = false,
     required this.textInputAction,
     required this.prefixIcon,
+    required this.label,
   });
   final IconData prefixIcon;
   final String hintText;
   final Function(String)? onChanged;
   final bool hide;
   final TextInputAction textInputAction;
+  final String label;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Theme.of(context).colorScheme.tertiary,
-      ),
-      child: TextFormField(
-        textInputAction: textInputAction,
-
-        cursorColor: Theme.of(context).colorScheme.primary,
-        style: TextStyle(color: Theme.of(context).colorScheme.primary),
-        obscureText: hide,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "Field is required";
-          }
-
-          return null;
-        },
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            prefixIcon,
-            color: Theme.of(context).colorScheme.primary,
+    return Column(
+      children: [
+        Row(children: [Text(label, style: TextStyle(fontSize: 17))]),
+        SizedBox(height: 7),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Theme.of(context).colorScheme.tertiary,
           ),
-          border: InputBorder.none,
+          child: TextFormField(
+            textInputAction: textInputAction,
 
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.inversePrimary,
-              width: 2,
-            ),
-          ),
-          contentPadding: EdgeInsets.only(left: 15, top: 15, bottom: 15),
-          hint: Text(
-            hintText,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 16,
+            cursorColor: Theme.of(context).colorScheme.primary,
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            obscureText: hide,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Field is required";
+              }
+
+              return null;
+            },
+            onChanged: onChanged,
+            decoration: InputDecoration(
+              prefixIcon: Icon(
+                prefixIcon,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              border: InputBorder.none,
+
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  width: 2,
+                ),
+              ),
+              contentPadding: EdgeInsets.only(left: 15, top: 15, bottom: 15),
+              hint: Text(
+                hintText,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
