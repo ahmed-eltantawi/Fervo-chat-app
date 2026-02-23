@@ -30,8 +30,11 @@ class DrawerView extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: ListTile(
-                title: Text('H O M E'),
-                leading: Icon(Icons.home),
+                title: Text(
+                  'HOME',
+                  style: TextStyle(fontSize: 20, letterSpacing: 3),
+                ),
+                leading: Icon(Icons.home, size: 25),
               ),
             ),
             GestureDetector(
@@ -40,8 +43,11 @@ class DrawerView extends StatelessWidget {
                 Navigator.pushNamed(context, AccountView.id);
               },
               child: ListTile(
-                title: Text('A C C O U N T'),
-                leading: Icon(Icons.person_4),
+                title: Text(
+                  'ACCOUNT',
+                  style: TextStyle(fontSize: 20, letterSpacing: 3),
+                ),
+                leading: Icon(Icons.person_4, size: 25),
               ),
             ),
             GestureDetector(
@@ -57,8 +63,11 @@ class DrawerView extends StatelessWidget {
                 );
               },
               child: ListTile(
-                title: Text('S E T T I N G S'),
-                leading: Icon(Icons.settings),
+                title: Text(
+                  'SETTINGS',
+                  style: TextStyle(fontSize: 20, letterSpacing: 3),
+                ),
+                leading: Icon(Icons.settings, size: 25),
               ),
             ),
 
@@ -74,8 +83,15 @@ class DrawerView extends StatelessWidget {
               },
 
               child: ListTile(
-                title: Text('L O G O U T'),
-                leading: Icon(Icons.logout),
+                title: Text(
+                  'LOGOUT',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 20,
+                    letterSpacing: 3,
+                  ),
+                ),
+                leading: Icon(Icons.logout, color: Colors.red, size: 25),
               ),
             ),
           ],

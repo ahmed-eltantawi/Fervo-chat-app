@@ -13,7 +13,7 @@ Future<void> makeUser(context, email, password, userName, {image}) async {
       'id': email,
       'name': userName,
       'createdAt': DateTime.now(),
-      'image': image,
+      'image': image ?? '',
     });
   }
 

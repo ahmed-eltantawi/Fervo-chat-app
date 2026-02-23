@@ -14,9 +14,9 @@ class CustomBottom extends StatelessWidget {
           color: kPrimaryColor,
           boxShadow: [
             BoxShadow(
-              color: kPrimaryColor.withValues(alpha: 0.3),
+              color: kPrimaryColor.withValues(alpha: 0.5),
               spreadRadius: 5,
-              blurRadius: 7,
+              blurRadius: 15,
               offset: Offset(0, 1),
             ),
           ],

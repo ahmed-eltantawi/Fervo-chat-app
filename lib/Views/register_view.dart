@@ -3,7 +3,8 @@ import 'package:chat_with_me_now/Views/otp_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_check_box.dart';
-import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
+import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
+import 'package:chat_with_me_now/Widgets/page_label.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/auth/isTheEmailExists.dart';
@@ -56,12 +57,8 @@ class _RegisterViewState extends State<RegisterView> {
                   SizedBox(height: 20),
                   AppIconWidget(),
                   Center(
-                    child: Text(
-                      'Create your distraction-free chats today',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                    child: PageLabel(
+                      text: 'Create your distraction-free chats today',
                     ),
                   ),
                   SizedBox(height: 30),

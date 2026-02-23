@@ -24,9 +24,7 @@ class CustomCheckbox extends StatelessWidget {
       checkColor: Theme.of(context).colorScheme.onPrimary,
       activeColor: kPrimaryColor,
       side: BorderSide(
-        color: showErrorOfCheckBox
-            ? Colors.red
-            : Theme.of(context).colorScheme.primary,
+        color: showErrorOfCheckBox ? Colors.red : kPrimaryColor,
         width: 2.0,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

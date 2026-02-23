@@ -14,9 +14,9 @@ class AppIconWidget extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: kPrimaryColor.withValues(alpha: 0.2),
+                color: kPrimaryColor.withValues(alpha: 0.5),
                 spreadRadius: 5,
-                blurRadius: 7,
+                blurRadius: 15,
                 offset: Offset(0, 1),
               ),
             ],

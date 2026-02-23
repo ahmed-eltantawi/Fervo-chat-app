@@ -49,7 +49,6 @@ class ChatApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
-
       routes: {
         SignIn.id: (context) => SignIn(),
         RegisterView.id: (context) => RegisterView(),

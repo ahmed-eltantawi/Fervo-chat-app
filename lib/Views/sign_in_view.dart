@@ -3,8 +3,9 @@ import 'package:chat_with_me_now/Views/register_view.dart';
 import 'package:chat_with_me_now/Views/reset_password_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
-import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
+import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
 import 'package:chat_with_me_now/Widgets/horizontal_text_line.dart';
+import 'package:chat_with_me_now/Widgets/page_label.dart';
 import 'package:chat_with_me_now/auth/sing_in_methods.dart';
 import 'package:chat_with_me_now/auth/make_user_and_sing_in_function.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
@@ -55,19 +56,15 @@ class _SignInState extends State<SignIn> {
                     children: [
                       SizedBox(height: 50),
                       AppIconWidget(),
-                      Text(
-                        'Enter your details to access your chats',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                      PageLabel(
+                        text: "Enter your details to access your chats",
                       ),
                       SizedBox(height: 40),
                       CustomFormTextField(
                         label: 'Email',
                         prefixIcon: Icons.email_outlined,
                         textInputAction: TextInputAction.next,
-                        hintText: 'yourName@example.com',
+                        hintText: 'example@gmail.com',
                         onChanged: (value) {
                           email = value.toLowerCase();
                         },
@@ -297,13 +294,12 @@ class singInIcons extends StatelessWidget {
         height: 50,
         width: 50,
         decoration: BoxDecoration(
+          border: Border.all(color: kPrimaryColor, width: .3),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(
-                context,
-              ).colorScheme.primary.withValues(alpha: 0.13),
+              color: kPrimaryColor.withValues(alpha: 0.4),
               spreadRadius: 5,
-              blurRadius: 7,
+              blurRadius: 10,
               offset: Offset(0, 1),
             ),
           ],

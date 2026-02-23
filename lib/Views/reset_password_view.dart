@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
-import 'package:chat_with_me_now/Widgets/custom_text_field.dart';
+import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
+import 'package:chat_with_me_now/Widgets/page_label.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,13 +50,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Text(
-                      "Enter your email to receive a\npassword reset link",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                    PageLabel(
+                      text:
+                          "Enter your email to receive a\npassword reset link",
                     ),
                     SizedBox(height: 30),
                     CustomFormTextField(

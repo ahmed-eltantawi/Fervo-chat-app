@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:chat_with_me_now/Views/chat_view.dart';
+import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,31 +14,15 @@ class FriendWidget extends StatelessWidget {
   late String? userEmail;
   @override
   Widget build(BuildContext context) {
-    // String userEmail = ModalRoute.of(context)!.settings.arguments as String;
-
     try {
-      userEmail = ModalRoute.of(context)!.settings.arguments as String;
+      if (userEmail == null) {
+        FirebaseAuth.instance.currentUser?.email;
+      } else {
+        userEmail = ModalRoute.of(context)!.settings.arguments as String;
+      }
     } catch (e) {
-      User? user = FirebaseAuth.instance.currentUser;
-      userEmail = user?.email;
+      userEmail = FirebaseAuth.instance.currentUser?.email;
     }
-    var circleAvatar = CircleAvatar(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-
-      backgroundImage: friendModel.image != null
-          ? NetworkImage(friendModel.image!)
-          : null,
-      radius: 30,
-      child: friendModel.image != ''
-          ? null
-          : Text(
-              friendModel.name[0],
-              style: TextStyle(
-                fontSize: 30,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
-            ),
-    );
     return GestureDetector(
       onTap: () {
         getChatId(userEmail!);
@@ -47,7 +34,24 @@ class FriendWidget extends StatelessWidget {
                 email: userEmail!,
                 chatId: chatId,
                 friendName: friendModel.name,
-                friendImage: circleAvatar,
+                friendImage: CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+
+                  backgroundImage:
+                      friendModel.image != '' || friendModel.image != null
+                      ? NetworkImage(friendModel.image!)
+                      : null,
+                  radius: 30,
+                  child: friendModel.image != '' || friendModel.image != null
+                      ? null
+                      : Text(
+                          friendModel.name[0],
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                        ),
+                ),
               );
             },
           ),
@@ -60,7 +64,6 @@ class FriendWidget extends StatelessWidget {
             width: double.infinity,
             height: 80,
           ),
-
           Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -68,7 +71,25 @@ class FriendWidget extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    circleAvatar,
+                    CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+
+                      backgroundImage: friendModel.image != null
+                          ? NetworkImage(friendModel.image!)
+                          : null,
+                      radius: 30,
+                      child: friendModel.image != ''
+                          ? null
+                          : Text(
+                              friendModel.name[0],
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.inversePrimary,
+                              ),
+                            ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Column(
@@ -88,7 +109,8 @@ class FriendWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Divider(),
+
+                Divider(color: kPrimaryColor),
               ],
             ),
           ),
@@ -98,6 +120,7 @@ class FriendWidget extends StatelessWidget {
   }
 
   void getChatId(String userEmail) {
+    log(userEmail + friendModel.id);
     if (userEmail.toLowerCase().compareTo(friendModel.id.toLowerCase()) < 0) {
       chatId = userEmail + friendModel.id;
     } else {

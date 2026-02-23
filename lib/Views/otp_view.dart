@@ -189,11 +189,9 @@ class _CustomTextOtp extends StatelessWidget {
         color: Theme.of(context).colorScheme.onPrimary,
         boxShadow: [
           BoxShadow(
-            color: Theme.of(
-              context,
-            ).colorScheme.primary.withValues(alpha: 0.13),
+            color: kPrimaryColor.withValues(alpha: 0.3),
             spreadRadius: 5,
-            blurRadius: 7,
+            blurRadius: 15,
             offset: Offset(0, 0),
           ),
         ],
