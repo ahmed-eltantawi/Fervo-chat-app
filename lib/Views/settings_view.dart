@@ -37,7 +37,7 @@ class _SettingsViewState extends State<SettingsView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // dark mode text
-            const Text("Light Mode"),
+            const Text("Dark Mode"),
 
             // switch toggle
             CupertinoSwitch(

@@ -1,6 +1,7 @@
 import 'package:chat_with_me_now/Views/acount_view.dart';
-import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Views/settings_view.dart';
+import 'package:chat_with_me_now/Views/sign_in_view.dart';
+import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,7 @@ class DrawerView extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 50),
-
-            CircleAvatar(backgroundImage: AssetImage(kAppIcon), radius: 50),
-            SizedBox(height: 10),
-            Text(
-              'Fervo Chat',
-              style: TextStyle(fontSize: 20, fontFamily: 'Pacifico'),
-            ),
+            AppIconWidget(),
             SizedBox(height: 40),
             GestureDetector(
               onTap: () {
@@ -73,15 +68,18 @@ class DrawerView extends StatelessWidget {
 
             Spacer(flex: 1),
             GestureDetector(
-              onTap: () async {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  SignIn.id,
-                  (route) => false,
-                );
-                await FirebaseAuth.instance.signOut();
+              onTap: () {
+                showAlertDialog(context);
               },
 
+              // () async {
+              //   Navigator.pushNamedAndRemoveUntil(
+              //     context,
+              //     SignIn.id,
+              //     (route) => false,
+              //   );
+              //   await FirebaseAuth.instance.signOut();
+              // },
               child: ListTile(
                 title: Text(
                   'LOGOUT',
@@ -92,6 +90,107 @@ class DrawerView extends StatelessWidget {
                   ),
                 ),
                 leading: Icon(Icons.logout, color: Colors.red, size: 25),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void showAlertDialog(BuildContext context) {
+  var colorRecord = (purple: Color(0xff43169C), white: Color(0xffF1F5F9));
+
+  // set up the buttons
+  _CustomBottom logOutButton = _CustomBottom(
+    text: "Log Out",
+    color: colorRecord.purple,
+    onTap: () async {
+      Navigator.pushNamedAndRemoveUntil(context, SignIn.id, (route) => false);
+      await FirebaseAuth.instance.signOut();
+    },
+  );
+  _CustomBottom cancelButton = _CustomBottom(
+    text: "Cancel",
+    color: colorRecord.white,
+    onTap: () {
+      Navigator.pop(context);
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Log Out", style: TextStyle(fontWeight: FontWeight.bold)),
+    content: Text(
+      "Are you sure you want to log out of Fervo?",
+      style: TextStyle(fontSize: 16),
+      textAlign: TextAlign.center,
+    ),
+    actions: [logOutButton, cancelButton],
+    icon: CircleAvatar(
+      minRadius: 32,
+      backgroundColor: Color(0xffECE7F5),
+      child: Icon(
+        Icons.logout,
+        color: kPrimaryColor,
+        size: 30,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+    actionsOverflowButtonSpacing: 10,
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+class _CustomBottom extends StatelessWidget {
+  const _CustomBottom({
+    super.key,
+    required this.text,
+    this.onTap,
+    required this.color,
+  });
+  final String text;
+  final VoidCallback? onTap;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          boxShadow: [
+            BoxShadow(
+              color: kPrimaryColor.withValues(alpha: 0.4),
+              spreadRadius: .5,
+              blurRadius: 20,
+              offset: Offset(0, 5),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(15),
+        ),
+        height: 60,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 20,
+
+                color: color == Color(0xff43169C)
+                    ? Theme.of(context).colorScheme.surface
+                    : Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],

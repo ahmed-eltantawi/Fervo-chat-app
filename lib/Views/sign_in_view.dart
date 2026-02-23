@@ -294,7 +294,6 @@ class singInIcons extends StatelessWidget {
         height: 50,
         width: 50,
         decoration: BoxDecoration(
-          border: Border.all(color: kPrimaryColor, width: .3),
           boxShadow: [
             BoxShadow(
               color: kPrimaryColor.withValues(alpha: 0.4),
