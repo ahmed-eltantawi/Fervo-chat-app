@@ -1,5 +1,5 @@
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:chat_with_me_now/auth/register_function.dart';
 import 'package:email_otp/email_otp.dart';
@@ -185,11 +185,11 @@ class _CustomTextOtp extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: kPrimaryColor, width: 1.3),
-        color: Theme.of(context).colorScheme.onPrimary,
+        border: Border.all(color: context.onPrimary, width: 1.3),
+        // color: Theme.of(context).colorScheme.onPrimary,
         boxShadow: [
           BoxShadow(
-            color: kPrimaryColor.withValues(alpha: 0.3),
+            color: context.onPrimary.withValues(alpha: 0.3),
             spreadRadius: 5,
             blurRadius: 15,
             offset: Offset(0, 0),
@@ -215,7 +215,7 @@ class _CustomTextOtp extends StatelessWidget {
           hintText: '0',
           hintStyle: TextStyle(
             fontFamily: 'San Francisco',
-            color: kPrimaryColor.withOpacity(0.6),
+            color: context.onPrimary.withOpacity(0.6),
           ),
 
           border: InputBorder.none,

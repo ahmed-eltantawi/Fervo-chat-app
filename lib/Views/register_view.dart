@@ -163,7 +163,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 'Terms & Conditions',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: kPrimaryColor,
+                                  color: context.onPrimary,
                                 ),
                               ),
                             ),
@@ -186,7 +186,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 'Privacy Policy',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: kPrimaryColor,
+                                  color: context.onPrimary,
                                 ),
                               ),
                             ),

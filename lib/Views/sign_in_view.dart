@@ -8,7 +8,7 @@ import 'package:chat_with_me_now/Widgets/horizontal_text_line.dart';
 import 'package:chat_with_me_now/Widgets/page_label.dart';
 import 'package:chat_with_me_now/auth/sing_in_methods.dart';
 import 'package:chat_with_me_now/auth/make_user_and_sing_in_function.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:chat_with_me_now/auth/user_login.dart';
 import 'package:chat_with_me_now/helper/vibration.dart';
@@ -124,7 +124,7 @@ class _SignInState extends State<SignIn> {
                               'Forgot Password?',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: kPrimaryColor,
+                                color: context.onPrimary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -152,7 +152,7 @@ class _SignInState extends State<SignIn> {
                             child: Text(
                               "Sing Up",
                               style: TextStyle(
-                                color: kPrimaryColor,
+                                color: context.onPrimary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -296,7 +296,7 @@ class singInIcons extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: kPrimaryColor.withValues(alpha: 0.4),
+              color: context.onPrimary.withValues(alpha: 0.4),
               spreadRadius: 5,
               blurRadius: 10,
               offset: Offset(0, 1),

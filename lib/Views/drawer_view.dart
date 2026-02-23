@@ -2,7 +2,7 @@ import 'package:chat_with_me_now/Views/acount_view.dart';
 import 'package:chat_with_me_now/Views/settings_view.dart';
 import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Widgets/app_icon_widget.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -71,15 +71,6 @@ class DrawerView extends StatelessWidget {
               onTap: () {
                 showAlertDialog(context);
               },
-
-              // () async {
-              //   Navigator.pushNamedAndRemoveUntil(
-              //     context,
-              //     SignIn.id,
-              //     (route) => false,
-              //   );
-              //   await FirebaseAuth.instance.signOut();
-              // },
               child: ListTile(
                 title: Text(
                   'LOGOUT',
@@ -132,7 +123,7 @@ void showAlertDialog(BuildContext context) {
       backgroundColor: Color(0xffECE7F5),
       child: Icon(
         Icons.logout,
-        color: kPrimaryColor,
+        color: context.onPrimary,
         size: 30,
         fontWeight: FontWeight.w600,
       ),
@@ -169,10 +160,10 @@ class _CustomBottom extends StatelessWidget {
           color: color,
           boxShadow: [
             BoxShadow(
-              color: kPrimaryColor.withValues(alpha: 0.4),
-              spreadRadius: .5,
-              blurRadius: 20,
-              offset: Offset(0, 5),
+              color: context.onPrimary.withValues(alpha: 0.35),
+              spreadRadius: 0.5,
+              blurRadius: 15,
+              offset: Offset(0, 1),
             ),
           ],
           borderRadius: BorderRadius.circular(15),
@@ -188,7 +179,7 @@ class _CustomBottom extends StatelessWidget {
                 fontSize: 20,
 
                 color: color == Color(0xff43169C)
-                    ? Theme.of(context).colorScheme.surface
+                    ? Colors.white
                     : Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 extension StringExtension on String {
   String capitalize() {
     return split(' ')
@@ -8,4 +10,8 @@ extension StringExtension on String {
         )
         .join(' ');
   }
+}
+
+extension AppColors on BuildContext {
+  Color get onPrimary => Theme.of(this).colorScheme.onPrimary;
 }

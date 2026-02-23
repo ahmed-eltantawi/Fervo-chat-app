@@ -78,6 +78,7 @@ flutter_native_splash:
   android_12:
     color: "#42385A"
     image: assets/images/appIcon.png
+    
 
 # The following section is specific to Flutter packages.
 flutter:

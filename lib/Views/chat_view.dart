@@ -1,5 +1,6 @@
 import 'package:chat_with_me_now/Widgets/chat_bubble.dart';
 import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/models/massage_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -141,11 +142,11 @@ class _ChatViewState extends State<ChatViewBetweenTwo> {
           ),
 
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: kPrimaryColor),
+            borderSide: BorderSide(color: context.onPrimary),
             borderRadius: BorderRadius.circular(16),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kPrimaryColor),
+            borderSide: BorderSide(color: context.onPrimary),
             borderRadius: BorderRadius.circular(16),
           ),
           focusedBorder: OutlineInputBorder(
@@ -173,7 +174,7 @@ class _ChatViewState extends State<ChatViewBetweenTwo> {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           0,
-          duration: Duration(milliseconds: 3000),
+          duration: Duration(milliseconds: 1500),
           curve: Curves.fastOutSlowIn,
         );
       }

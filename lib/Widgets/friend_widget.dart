@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:chat_with_me_now/Views/chat_view.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +110,7 @@ class FriendWidget extends StatelessWidget {
                   ],
                 ),
 
-                Divider(color: kPrimaryColor),
+                Divider(),
               ],
             ),
           ),

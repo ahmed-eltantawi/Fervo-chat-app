@@ -1,4 +1,4 @@
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckbox extends StatelessWidget {
@@ -21,10 +21,10 @@ class CustomCheckbox extends StatelessWidget {
       ),
       value: value,
       onChanged: onChanged,
-      checkColor: Theme.of(context).colorScheme.onPrimary,
-      activeColor: kPrimaryColor,
+      checkColor: Theme.of(context).colorScheme.surface,
+      activeColor: context.onPrimary,
       side: BorderSide(
-        color: showErrorOfCheckBox ? Colors.red : kPrimaryColor,
+        color: showErrorOfCheckBox ? Colors.red : context.onPrimary,
         width: 2.0,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

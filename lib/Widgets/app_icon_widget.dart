@@ -1,4 +1,5 @@
 import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:flutter/material.dart';
 
 class AppIconWidget extends StatelessWidget {
@@ -12,10 +13,11 @@ class AppIconWidget extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           height: 90,
           decoration: BoxDecoration(
+            color: context.onPrimary.withValues(alpha: 0.5),
             boxShadow: [
               BoxShadow(
-                color: kPrimaryColor.withValues(alpha: 0.5),
-                spreadRadius: 5,
+                color: context.onPrimary.withValues(alpha: 0.5),
+                spreadRadius: 0.5,
                 blurRadius: 15,
                 offset: Offset(0, 1),
               ),
@@ -29,18 +31,10 @@ class AppIconWidget extends StatelessWidget {
           'Fervo Chat',
           style: TextStyle(
             fontSize: 35,
-            color: kPrimaryColor,
+            color: context.onPrimary,
             fontFamily: 'Pacifico',
           ),
         ),
-        // Text(
-        //   'Fervo Chat',
-        //   style: TextStyle(
-        //     fontWeight: FontWeight.bold,
-        //     fontSize: 45,
-        //     color: kPrimaryColor,
-        //   ),
-        // ),
         SizedBox(height: 10),
       ],
     );

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
 import 'package:chat_with_me_now/Widgets/page_label.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -108,7 +108,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                             "Log in",
                             style: TextStyle(
                               fontSize: 16,
-                              color: kPrimaryColor,
+                              color: context.onPrimary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

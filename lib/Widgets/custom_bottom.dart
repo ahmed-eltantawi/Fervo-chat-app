@@ -11,10 +11,12 @@ class CustomBottom extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: kPrimaryColor,
+          color: Theme.of(context).colorScheme.onPrimary,
           boxShadow: [
             BoxShadow(
-              color: kPrimaryColor.withValues(alpha: 0.5),
+              color: Theme.of(
+                context,
+              ).colorScheme.onPrimary.withValues(alpha: 0.5),
               spreadRadius: 5,
               blurRadius: 15,
               offset: Offset(0, 1),
@@ -31,16 +33,12 @@ class CustomBottom extends StatelessWidget {
               text,
               style: TextStyle(
                 fontSize: 20,
-                color: Theme.of(context).colorScheme.surface,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(width: 10),
-            Icon(
-              Icons.arrow_forward_rounded,
-              size: 25,
-              color: Theme.of(context).colorScheme.surface,
-            ),
+            Icon(Icons.arrow_forward_rounded, size: 25, color: Colors.white),
           ],
         ),
       ),
