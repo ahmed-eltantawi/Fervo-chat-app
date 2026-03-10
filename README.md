@@ -28,6 +28,12 @@
 [Donwload now](https://ahmedeltantawi.netlify.app/fervo_chat.apk)
 
 ---
+
+
+### 📱 Mobile (Android)
+
+---
+
 ## 📱 App Screenshots
 
 <table>
