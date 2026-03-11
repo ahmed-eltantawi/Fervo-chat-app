@@ -6,6 +6,7 @@ import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
 import 'package:chat_with_me_now/Widgets/google_and_facebook_login_widget.dart';
 import 'package:chat_with_me_now/Widgets/horizontal_text_line.dart';
 import 'package:chat_with_me_now/Widgets/page_label.dart';
+import 'package:chat_with_me_now/Widgets/password_text_field_widget.dart';
 import 'package:chat_with_me_now/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
@@ -13,15 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class SignIn extends StatelessWidget {
+  SignIn({super.key});
   static String id = 'SignIn';
 
-  @override
-  State<SignIn> createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
   String? email;
 
   String? password;
@@ -29,10 +25,6 @@ class _SignInState extends State<SignIn> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool isLoading = false;
-
-  bool passwordHide = true;
-
-  IconData passwordIcon = Icons.visibility_off_outlined;
 
   @override
   Widget build(BuildContext context) {
@@ -74,50 +66,7 @@ class _SignInState extends State<SignIn> {
                             },
                           ),
                           SizedBox(height: 30),
-                          BlocConsumer<PasswordCubit, PasswordState>(
-                            listener: (context, state) {
-                              if (state is ShowPassword) {
-                                passwordHide = false;
-                                passwordIcon = BlocProvider.of<PasswordCubit>(
-                                  context,
-                                ).passwordIcon;
-                              } else {
-                                passwordHide = true;
-                                passwordIcon = BlocProvider.of<PasswordCubit>(
-                                  context,
-                                ).passwordIcon;
-                              }
-                            },
-                            builder: (context, state) {
-                              return Stack(
-                                alignment: AlignmentGeometry.xy(1, .8),
-                                children: [
-                                  CustomFormTextField(
-                                    label: 'Password',
-                                    prefixIcon: Icons.lock_outlined,
-                                    textInputAction: TextInputAction.done,
-                                    hide: passwordHide,
-                                    hintText: '********',
-                                    onChanged: (value) {
-                                      password = value;
-                                    },
-                                  ),
-                                  IconButton(
-                                    onPressed: BlocProvider.of<PasswordCubit>(
-                                      context,
-                                    ).changeThePasswordState,
-
-                                    icon: Icon(
-                                      passwordIcon,
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+                          PasswordTextField(),
                           SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -152,7 +101,9 @@ class _SignInState extends State<SignIn> {
                                 context: context,
                                 email: email,
                                 formKey: formKey,
-                                password: password,
+                                password: BlocProvider.of<PasswordCubit>(
+                                  context,
+                                ).password,
                               );
                             },
                           ),

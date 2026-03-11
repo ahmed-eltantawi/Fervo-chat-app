@@ -5,7 +5,7 @@ part 'password_state.dart';
 
 class PasswordCubit extends Cubit<PasswordState> {
   PasswordCubit() : super(PasswordInitial());
-
+  String? password;
   IconData passwordIcon = Icons.visibility_off_outlined;
   void changeThePasswordState() {
     if (passwordIcon == Icons.visibility_off_outlined) {

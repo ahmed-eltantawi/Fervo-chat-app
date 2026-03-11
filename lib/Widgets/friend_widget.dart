@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:chat_with_me_now/Views/chat_view.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class FriendWidget extends StatelessWidget {
   FriendWidget({super.key, required this.friendModel});
-
   final FriendModel friendModel;
   late String chatId;
   late String? userEmail;
@@ -118,7 +116,6 @@ class FriendWidget extends StatelessWidget {
   }
 
   void getChatId(String userEmail) {
-    log(userEmail + friendModel.id);
     if (userEmail.toLowerCase().compareTo(friendModel.id.toLowerCase()) < 0) {
       chatId = userEmail + friendModel.id;
     } else {

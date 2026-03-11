@@ -56,7 +56,7 @@ class _OTPViewState extends State<OTPView> {
   }
 
   void _startCooldownTimer() {
-    _secondsRemaining = 60;
+    _secondsRemaining = 30;
     _timer?.cancel();
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
@@ -221,10 +221,7 @@ class _OTPViewState extends State<OTPView> {
 }
 
 class _CustomTextOtp extends StatelessWidget {
-  const _CustomTextOtp({
-    required this.onChanged,
-    required this.controller,
-  });
+  const _CustomTextOtp({required this.onChanged, required this.controller});
   final Function onChanged;
   final TextEditingController controller;
 
