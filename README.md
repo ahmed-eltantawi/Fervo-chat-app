@@ -23,6 +23,22 @@
 **Fervo Chat** is a feature-rich, real-time messaging application developed using Flutter and powered by Firebase. It allows users to register, sign in using multiple authentication methods (Email/Password, Google, Facebook), verify their email via OTP, and chat with other users in real-time. The app supports dark and light themes, profile management, and provides a smooth, engaging user experience with Lottie animations and haptic feedback.
 
 ---
+
+# 🤖 Download the Android app here.
+[Donwload now](https://ahmedeltantawi.netlify.app/fervo_chat.apk)
+
+---
+
+
+### 📱DEMO
+
+
+https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
+
+
+
+---
+
 ## 📱 App Screenshots
 
 <table>
