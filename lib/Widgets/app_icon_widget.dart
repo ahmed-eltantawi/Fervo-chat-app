@@ -13,11 +13,11 @@ class AppIconWidget extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           height: 90,
           decoration: BoxDecoration(
-            color: context.onPrimary.withValues(alpha: 0.5),
+            color: context.onPrimary,
             boxShadow: [
               BoxShadow(
-                color: context.onPrimary.withValues(alpha: 0.5),
-                spreadRadius: 0.5,
+                color: context.onPrimary.withValues(alpha: 0.4),
+                spreadRadius: 2,
                 blurRadius: 15,
                 offset: Offset(0, 1),
               ),

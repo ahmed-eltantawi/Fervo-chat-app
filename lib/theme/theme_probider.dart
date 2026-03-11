@@ -7,7 +7,7 @@ class ThemeProvider extends ChangeNotifier {
   //? ====== put the default theme =======
   //? ====== darkMode or lightMode =======
   //======================================
-  ThemeData _themeData = darkMode;
+  ThemeData _themeData = lightMode;
   ThemeData get themeData => _themeData;
   bool get isDarkMode => _themeData == darkMode;
 

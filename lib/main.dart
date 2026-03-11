@@ -2,12 +2,15 @@ import 'package:chat_with_me_now/Views/acount_view.dart';
 import 'package:chat_with_me_now/Views/home_view.dart';
 import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
+import 'package:chat_with_me_now/cubits/login_cubit/login_cubit.dart';
+import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
 import 'package:chat_with_me_now/firebase_options.dart';
 import 'package:chat_with_me_now/theme/theme_probider.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -33,9 +36,15 @@ void main() async {
   );
 
   runApp(
-    ChangeNotifierProvider(
-      child: ChatApp(),
-      create: (context) => ThemeProvider(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => PasswordCubit()),
+      ],
+      child: ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        child: ChatApp(),
+      ),
     ),
   );
 }

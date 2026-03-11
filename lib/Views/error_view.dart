@@ -27,7 +27,6 @@ class ErrorView extends StatelessWidget {
           ],
         ),
       ),
-      // Container(child: Lottie.asset('assets/images/error.json')),
     );
   }
 }

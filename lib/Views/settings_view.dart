@@ -41,6 +41,7 @@ class _SettingsViewState extends State<SettingsView> {
 
             // switch toggle
             CupertinoSwitch(
+              inactiveTrackColor: Theme.of(context).colorScheme.inversePrimary,
               value: Provider.of<ThemeProvider>(
                 context,
                 listen: false,

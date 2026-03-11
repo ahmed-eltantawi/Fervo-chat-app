@@ -1,4 +1,3 @@
-import 'package:chat_with_me_now/helper/consts.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottom extends StatelessWidget {
@@ -17,7 +16,7 @@ class CustomBottom extends StatelessWidget {
               color: Theme.of(
                 context,
               ).colorScheme.onPrimary.withValues(alpha: 0.5),
-              spreadRadius: 5,
+              spreadRadius: 4,
               blurRadius: 15,
               offset: Offset(0, 1),
             ),

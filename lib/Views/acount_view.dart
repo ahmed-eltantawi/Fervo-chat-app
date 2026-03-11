@@ -45,7 +45,6 @@ class AccountView extends StatelessWidget {
                   child: Stack(
                     alignment: AlignmentGeometry.xy(.75, 1.09),
 
-                    // AlignmentGeometry.bottomRight,
                     children: [
                       CircleAvatar(
                         radius: 101,
