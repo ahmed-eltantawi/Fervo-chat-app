@@ -110,48 +110,69 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
 
 ```
 lib/
-├── main.dart                          # App entry point, Firebase & OTP config
-├── firebase_options.dart              # Firebase configuration
+├── main.dart                                # App entry point, Firebase & OTP config
+├── firebase_options.dart                    # Firebase configuration
 │
-├── Views/                             # All app screens
-│   ├── sign_in_view.dart              # Sign in (Email, Google, Facebook)
-│   ├── register_view.dart             # User registration
-│   ├── otp_view.dart                  # Email OTP verification
-│   ├── home_view.dart                 # Friends list (main screen)
-│   ├── chat_view.dart                 # Real-time chat between two users
-│   ├── acount_view.dart               # User profile/account page
-│   ├── updata_profile_photo.dart      # Update profile photo
-│   ├── settings_view.dart             # Dark/Light mode toggle
-│   ├── drawer_view.dart               # Side navigation drawer
-│   └── error_view.dart                # Error display page
+├── Views/                                   # All app screens
+│   ├── sign_in_view.dart                    # Sign in (Email, Google, Facebook)
+│   ├── register_view.dart                   # User registration
+│   ├── otp_view.dart                        # Email OTP verification
+│   ├── home_view.dart                       # Friends list (main screen)
+│   ├── chat_view.dart                       # Real-time chat between two users
+│   ├── acount_view.dart                     # User profile/account page
+│   ├── updata_profile_photo.dart            # Update profile photo
+│   ├── settings_view.dart                   # Dark/Light mode toggle
+│   ├── drawer_view.dart                     # Side navigation drawer
+│   ├── reset_password_view.dart             # Reset password screen
+│   └── error_view.dart                      # Error display page
 │
-├── Widgets/                           # Reusable UI components
-│   ├── app_icon_widget.dart           # App icon/logo widget
-│   ├── chat_bubble.dart               # Chat message bubbles
-│   ├── custom_bottom.dart             # Reusable button widget
-│   ├── custom_text_field.dart         # Reusable form text field
-│   └── friend_widget.dart             # Friend list item widget
+├── Widgets/                                 # Reusable UI components
+│   ├── app_icon_widget.dart                 # App icon/logo widget
+│   ├── chat_bubble.dart                     # Chat message bubbles
+│   ├── custom_bottom.dart                   # Reusable button widget
+│   ├── custom_check_box.dart                # Custom checkbox widget
+│   ├── custom_form_text_field.dart           # Reusable form text field
+│   ├── friend_widget.dart                   # Friend list item widget
+│   ├── google_and_facebook_login_widget.dart # Google & Facebook login buttons
+│   ├── horizontal_text_line.dart            # Horizontal divider with text
+│   ├── page_label.dart                      # Page title label widget
+│   ├── password_text_field_widget.dart       # Password input with toggle visibility
+│   ├── sing_in_icon.dart                    # Sign-in provider icon widget
+│   └── terms_and_conditions_widget.dart     # Terms & conditions checkbox widget
 │
-├── auth/                              # Authentication logic
-│   ├── sing_in_methods.dart           # Google & Facebook sign-in
-│   ├── user_login.dart                # Email/password login
-│   ├── register_function.dart         # User registration with Firebase
-│   ├── make_user_and_sing_in_function.dart  # Create user doc & sign in
-│   └── isTheEmailExists.dart          # Check if email already exists
+├── cubits/                                  # BLoC/Cubit state management
+│   ├── login_cubit/
+│   │   ├── login_cubit.dart                 # Login logic & state management
+│   │   └── login_state.dart                 # Login states definition
+│   ├── password_cubit/
+│   │   ├── password_cubit.dart              # Password visibility toggle cubit
+│   │   └── password_state.dart              # Password states definition
+│   └── register/
+│       ├── register_cubit.dart              # Registration logic & state management
+│       └── register_state.dart              # Registration states definition
 │
-├── models/                            # Data models
-│   ├── friend_model.dart              # User/Friend data model
-│   └── massage_model.dart             # Message data model
+├── auth/                                    # Authentication logic
+│   ├── sing_in_methods.dart                 # Google & Facebook sign-in
+│   ├── user_login.dart                      # Email/password login
+│   ├── register_function.dart               # User registration with Firebase
+│   ├── make_user_and_sing_in_function.dart   # Create user doc & sign in
+│   └── isTheEmailExists.dart                # Check if email already exists
 │
-├── helper/                            # Utility functions & constants
-│   ├── consts.dart                    # App constants (colors, collection names)
-│   ├── extensions.dart                # String extensions (capitalize)
-│   └── show_snack_bar.dart            # SnackBar helper function
+├── models/                                  # Data models
+│   ├── friend_model.dart                    # User/Friend data model
+│   └── massage_model.dart                   # Message data model
 │
-└── theme/                             # Theming
-    ├── dark_mode_them.dart            # Dark theme data
-    ├── light_mode_theme.dart          # Light theme data
-    └── theme_probider.dart            # ThemeProvider with ChangeNotifier
+├── helper/                                  # Utility functions & constants
+│   ├── consts.dart                          # App constants (colors, collection names)
+│   ├── extensions.dart                      # String extensions (capitalize)
+│   ├── show_snack_bar.dart                  # SnackBar helper function
+│   ├── vibration.dart                       # Haptic/vibration feedback helper
+│   └── web_view.dart                        # In-app web view launcher
+│
+└── theme/                                   # Theming
+    ├── dark_mode_them.dart                  # Dark theme data
+    ├── light_mode_theme.dart                # Light theme data
+    └── theme_probider.dart                  # ThemeProvider with ChangeNotifier
 ```
 
 ---

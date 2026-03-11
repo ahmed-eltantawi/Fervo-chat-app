@@ -105,7 +105,6 @@ class FriendWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 Divider(),
               ],
             ),

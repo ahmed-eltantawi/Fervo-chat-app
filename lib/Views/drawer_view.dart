@@ -141,12 +141,7 @@ void showAlertDialog(BuildContext context) {
 }
 
 class _CustomBottom extends StatelessWidget {
-  const _CustomBottom({
-    super.key,
-    required this.text,
-    this.onTap,
-    required this.color,
-  });
+  const _CustomBottom({required this.text, this.onTap, required this.color});
   final String text;
   final VoidCallback? onTap;
   final Color color;
