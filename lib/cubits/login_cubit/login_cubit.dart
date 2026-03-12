@@ -96,9 +96,9 @@ class LoginCubit extends Cubit<LoginState> {
     User user = FirebaseAuth.instance.currentUser!;
     await makeUser(
       context,
-      user.email,
+      user.email!,
       user.uid,
-      user.displayName,
+      user.displayName!,
       image: user.photoURL,
     );
   }

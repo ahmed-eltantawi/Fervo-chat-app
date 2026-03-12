@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
+import 'package:chat_with_me_now/constants/images.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
+import 'package:chat_with_me_now/helper/get_image_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:chat_with_me_now/auth/register_function.dart';
 import 'package:email_otp/email_otp.dart';
@@ -33,7 +35,7 @@ class _OTPViewState extends State<OTPView> {
   );
 
   bool isLoading = false;
-  String image = 'assets/images/email sended.json';
+  String image = Assets.imagesEmailSended;
 
   int _secondsRemaining = 0;
   Timer? _timer;
@@ -145,7 +147,7 @@ class _OTPViewState extends State<OTPView> {
                     onTap: () async {
                       if (!isComplete) {
                         setState(() {
-                          image = 'assets/images/error x.json';
+                          AppImage(image: Assets.imagesErrorX);
                         });
                         showSnackBar(context, 'Please enter all digits');
                         return;
@@ -170,7 +172,7 @@ class _OTPViewState extends State<OTPView> {
                         if (!mounted) return;
                         showSnackBar(context, 'OTP is incorrect');
                         setState(() {
-                          image = 'assets/images/error x.json';
+                          AppImage(image: Assets.imagesErrorX);
                         });
                         _clearAllPins();
                       }
@@ -193,10 +195,10 @@ class _OTPViewState extends State<OTPView> {
                       : GestureDetector(
                           onTap: () async {
                             setState(() {
-                              if (image != 'assets/images/error x.json') {
+                              if (image != Assets.imagesErrorX) {
                                 isLoading = true;
                               }
-                              image = 'assets/images/email sended.json';
+                              image = Assets.imagesEmailSended;
                             });
                             await sendOtpCode();
                             if (!mounted) return;

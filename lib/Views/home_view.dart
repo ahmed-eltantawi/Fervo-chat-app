@@ -1,6 +1,6 @@
 import 'package:chat_with_me_now/Views/drawer_view.dart';
 import 'package:chat_with_me_now/Widgets/friend_widget.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/constants/collections.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

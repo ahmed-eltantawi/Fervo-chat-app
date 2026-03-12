@@ -124,7 +124,7 @@ class SignIn extends StatelessWidget {
                                   Navigator.pushNamed(context, RegisterView.id);
                                 },
                                 child: Text(
-                                  "Sing Up",
+                                  "Sign Up",
                                   style: TextStyle(
                                     color: context.onPrimary,
                                     fontSize: 18,

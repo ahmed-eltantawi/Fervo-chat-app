@@ -1,6 +1,8 @@
 import 'package:chat_with_me_now/Widgets/chat_bubble.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/constants/collections.dart';
+import 'package:chat_with_me_now/constants/images.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
+import 'package:chat_with_me_now/helper/get_image_function.dart';
 import 'package:chat_with_me_now/models/massage_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -78,8 +80,8 @@ class _ChatViewState extends State<ChatViewBetweenTwo> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          LottieBuilder.asset(
-                            "assets/images/no_massage_yet.json",
+                          AppImage(
+                            image: Assets.imagesNoMassageYet,
                             height: 350,
                           ),
                           Row(

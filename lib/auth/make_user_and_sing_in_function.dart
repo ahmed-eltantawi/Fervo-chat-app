@@ -1,10 +1,16 @@
 import 'package:chat_with_me_now/Views/home_view.dart';
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/constants/collections.dart';
 import 'package:chat_with_me_now/auth/isTheEmailExists.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-Future<void> makeUser(context, email, password, userName, {image}) async {
+Future<void> makeUser(
+  BuildContext context,
+  String email,
+  String password,
+  String userName, {
+  image,
+}) async {
   CollectionReference users = FirebaseFirestore.instance.collection(
     kFriendsCollection,
   );

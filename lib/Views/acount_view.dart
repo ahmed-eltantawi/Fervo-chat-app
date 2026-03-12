@@ -1,4 +1,5 @@
 import 'package:chat_with_me_now/Views/updata_profile_photo.dart';
+import 'package:chat_with_me_now/constants/images.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class AccountView extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 100,
                           backgroundImage: image == null || image == ''
-                              ? const AssetImage('assets/images/profile.jpg')
+                              ? const AssetImage(Assets.imagesProfile)
                               : NetworkImage(image),
                         ),
                       ),
@@ -84,7 +85,7 @@ class AccountView extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       child: const CircleAvatar(
         radius: 100,
-        backgroundImage: AssetImage('assets/images/profile.jpg'),
+        backgroundImage: AssetImage(Assets.imagesProfile),
       ),
     );
   }

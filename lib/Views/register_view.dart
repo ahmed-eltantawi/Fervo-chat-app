@@ -111,7 +111,11 @@ class _RegisterViewState extends State<RegisterView> {
                             },
                             child: Text(
                               "Sign In",
-                              style: TextStyle(fontWeight: FontWeight.w700),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: context.onPrimary,
+                              ),
                             ),
                           ),
                         ],

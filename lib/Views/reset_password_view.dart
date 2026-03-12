@@ -1,7 +1,9 @@
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
 import 'package:chat_with_me_now/Widgets/page_label.dart';
+import 'package:chat_with_me_now/constants/images.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
+import 'package:chat_with_me_now/helper/get_image_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  String image = "assets/images/reset_password.json";
+  String image = Assets.imagesResetPassword;
 
   String? email;
 
@@ -33,9 +35,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                   children: [
                     SizedBox(
                       height: 250,
-                      child: LottieBuilder.asset(
-                        image,
-                        repeat: false,
+                      child: AppImage(
+                        image: image,
+                        repeatForLottieFiles: false,
                         key: ValueKey(image),
                       ),
                     ),
@@ -71,8 +73,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               email: email!,
                             );
                             setState(() {
-                              image =
-                                  "assets/images/reset_password_email_is_sented.json";
+                              image = Assets.imagesResetPasswordEmailIsSended;
                             });
                             showSnackBar(
                               context,

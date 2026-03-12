@@ -1,5 +1,7 @@
-import 'package:chat_with_me_now/helper/consts.dart';
+import 'package:chat_with_me_now/constants/collections.dart';
+import 'package:chat_with_me_now/constants/images.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
+import 'package:chat_with_me_now/helper/get_image_function.dart';
 import 'package:flutter/material.dart';
 
 class AppIconWidget extends StatelessWidget {
@@ -24,7 +26,7 @@ class AppIconWidget extends StatelessWidget {
             ],
             borderRadius: BorderRadius.circular(35),
           ),
-          child: Image.asset(kAppIcon),
+          child: AppImage(image: Assets.imagesAppIcon),
         ),
         SizedBox(height: 10),
         Text(

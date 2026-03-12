@@ -1,4 +1,5 @@
 import 'package:chat_with_me_now/helper/extensions.dart';
+import 'package:chat_with_me_now/helper/get_image_function.dart';
 import 'package:flutter/material.dart';
 
 class SingInIcons extends StatelessWidget {
@@ -30,7 +31,7 @@ class SingInIcons extends StatelessWidget {
             borderRadius: BorderRadius.circular(200),
           ),
           margin: EdgeInsets.all(.4),
-          child: Image.asset(image),
+          child: AppImage(image: image),
         ),
       ),
     );
