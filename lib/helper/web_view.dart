@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class _WebShower extends StatefulWidget {
-  const _WebShower({super.key, required this.url});
+  const _WebShower({required this.url});
   final String? url;
 
   @override
