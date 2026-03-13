@@ -1,186 +1,81 @@
 import 'package:chat_with_me_now/Widgets/chat_bubble.dart';
-import 'package:chat_with_me_now/constants/collections.dart';
-import 'package:chat_with_me_now/constants/images.dart';
-import 'package:chat_with_me_now/helper/extensions.dart';
-import 'package:chat_with_me_now/helper/get_image_function.dart';
+import 'package:chat_with_me_now/Widgets/error_widget.dart';
+import 'package:chat_with_me_now/Widgets/massage_text_field_widget.dart';
+import 'package:chat_with_me_now/Widgets/no_massages_yet_widget.dart';
+import 'package:chat_with_me_now/cubits/chat_cubit/chat_cubit.dart';
+import 'package:chat_with_me_now/models/friend_model.dart';
 import 'package:chat_with_me_now/models/massage_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatViewBetweenTwo extends StatefulWidget {
-  const ChatViewBetweenTwo({
+class ChatViewBetweenTwo extends StatelessWidget {
+  ChatViewBetweenTwo({
     super.key,
-    required this.chatId,
-    required this.email,
-    required this.friendName,
-    required this.friendImage,
+    required this.userEmail,
+    required this.friendModel,
   });
   static String id = 'ChatViewBetweenTwo';
-  final String chatId;
-  final String email;
-  final String friendName;
-  final CircleAvatar friendImage;
-
-  @override
-  State<ChatViewBetweenTwo> createState() => _ChatViewState();
-}
-
-@override
-class _ChatViewState extends State<ChatViewBetweenTwo> {
+  final String userEmail;
+  final FriendModel friendModel;
   final ScrollController _scrollController = ScrollController();
-  late CollectionReference massages = FirebaseFirestore.instance.collection(
-    widget.chatId,
-  );
-  String massage = '';
-  TextEditingController controller = TextEditingController();
 
   List<MassageModel> massagesList = [];
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: massages
-          .orderBy(kCreatedAtCollection, descending: true)
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Text('Something went wrong');
-        }
+    BlocProvider.of<ChatCubit>(
+      context,
+    ).getMassages(friendEmail: friendModel.id, userEmail: userEmail);
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
 
-        if (snapshot.hasData) {
-          massagesList.clear();
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            massagesList.add(MassageModel.fromJson(snapshot.data!.docs[i]));
-          }
-        }
-
-        return Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          appBar: AppBar(
-            foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            centerTitle: true,
-            title: Text(widget.friendName, style: TextStyle(fontSize: 23)),
-          ),
-          body: snapshot.connectionState == ConnectionState.waiting
-              ? Center(
-                  child: SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: CircularProgressIndicator(),
-                  ),
-                )
-              : massagesList.isEmpty
-              ? Column(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AppImage(
-                            image: Assets.imagesNoMassageYet,
-                            height: 350,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Start a massage with "),
-                              Text(
-                                widget.friendName,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(" now"),
-                            ],
-                          ),
-                        ],
-                      ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(friendModel.name, style: TextStyle(fontSize: 23)),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: BlocConsumer<ChatCubit, ChatState>(
+              listener: (context, state) {
+                if (state is ChatSusses) {
+                  massagesList = state.massagesList;
+                }
+              },
+              builder: (context, state) {
+                if (state is ChatLoading) {
+                  return Center(
+                    child: SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(),
                     ),
-                    MassageTextField(context),
-                  ],
-                )
-              : Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        reverse: true,
-                        controller: _scrollController,
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          return massagesList[index].id == widget.email
-                              ? MyChatBubble(massage: massagesList[index])
-                              : FriendChatBubble(massage: massagesList[index]);
-                        },
-                      ),
-                    ),
-                    MassageTextField(context),
-                  ],
-                ),
-        );
-      },
-    );
-  }
-
-  Padding MassageTextField(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 30, top: 16),
-      child: TextField(
-        controller: controller,
-        onSubmitted: (value) {
-          onSubmitted(value);
-        },
-        onChanged: (value) {
-          massage = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'Sent Massage',
-          suffixIcon: IconButton(
-            icon: Icon(Icons.send),
-            onPressed: () {
-              onSubmitted(massage);
-            },
-          ),
-
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: context.onPrimary),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: context.onPrimary),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.inversePrimary,
-              width: 2,
+                  );
+                } else if (state is ChatNoMassagesYetWidget) {
+                  return NoMassagesWidget(friendModel: friendModel);
+                } else if (state is ChatSusses) {
+                  return ListView.builder(
+                    reverse: true,
+                    controller: _scrollController,
+                    itemCount: massagesList.length,
+                    itemBuilder: (context, index) {
+                      return massagesList[index].id == userEmail
+                          ? MyChatBubble(massage: massagesList[index])
+                          : FriendChatBubble(massage: massagesList[index]);
+                    },
+                  );
+                } else {
+                  return CustomErrorWidget();
+                }
+              },
             ),
-            borderRadius: BorderRadius.circular(16),
           ),
-        ),
+          MassageTextFieldWidget(scrollController: _scrollController),
+        ],
       ),
     );
-  }
-
-  void onSubmitted(String value) {
-    if (value.isEmpty) {
-    } else {
-      massages.add({
-        'text': value,
-        kCreatedAtCollection: DateTime.now(),
-        'id': widget.email,
-      });
-      controller.clear();
-
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          0,
-          duration: Duration(milliseconds: 1500),
-          curve: Curves.fastOutSlowIn,
-        );
-      }
-    }
-    massage = '';
   }
 }

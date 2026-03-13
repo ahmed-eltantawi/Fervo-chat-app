@@ -1,7 +1,5 @@
-import 'package:chat_with_me_now/constants/images.dart';
-import 'package:chat_with_me_now/helper/get_image_function.dart';
+import 'package:chat_with_me_now/Widgets/error_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class ErrorView extends StatelessWidget {
   const ErrorView({super.key});
@@ -10,23 +8,7 @@ class ErrorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('ERROR'), centerTitle: true),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AppImage(
-              image: Assets.imagesError,
-              width: 250,
-              fit: BoxFit.contain,
-            ),
-            const Text(
-              'There is some thing wrong, try again',
-              style: TextStyle(fontSize: 20),
-            ),
-            const SizedBox(height: 300),
-          ],
-        ),
-      ),
+      body: CustomErrorWidget(),
     );
   }
 }

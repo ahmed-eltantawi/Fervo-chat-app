@@ -2,10 +2,11 @@ import 'package:chat_with_me_now/Views/acount_view.dart';
 import 'package:chat_with_me_now/Views/home_view.dart';
 import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
+import 'package:chat_with_me_now/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_with_me_now/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
 import 'package:chat_with_me_now/cubits/register/register_cubit.dart';
-import 'package:chat_with_me_now/helper/firebase_options.dart';
+import 'package:chat_with_me_now/firebase_options.dart';
 import 'package:chat_with_me_now/theme/theme_probider.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,16 +38,9 @@ void main() async {
   );
 
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => LoginCubit()),
-        BlocProvider(create: (context) => PasswordCubit()),
-        BlocProvider(create: (context) => RegisterCubit()),
-      ],
-      child: ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
-        child: ChatApp(),
-      ),
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: ChatApp(),
     ),
   );
 }
@@ -57,16 +51,24 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeProvider>(context).themeData,
-      routes: {
-        SignIn.id: (context) => SignIn(),
-        RegisterView.id: (context) => RegisterView(),
-        HomeView.id: (context) => HomeView(),
-        AccountView.id: (context) => AccountView(),
-      },
-      initialRoute: user?.email == null ? SignIn.id : HomeView.id,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => PasswordCubit()),
+        BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => ChatCubit()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: Provider.of<ThemeProvider>(context).themeData,
+        routes: {
+          SignIn.id: (context) => SignIn(),
+          RegisterView.id: (context) => RegisterView(),
+          HomeView.id: (context) => HomeView(),
+          AccountView.id: (context) => AccountView(),
+        },
+        initialRoute: user?.email == null ? SignIn.id : HomeView.id,
+      ),
     );
   }
 }

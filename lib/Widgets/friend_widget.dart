@@ -1,7 +1,9 @@
 import 'package:chat_with_me_now/Views/chat_view.dart';
+import 'package:chat_with_me_now/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FriendWidget extends StatelessWidget {
   FriendWidget({super.key, required this.friendModel});
@@ -21,33 +23,13 @@ class FriendWidget extends StatelessWidget {
     }
     return GestureDetector(
       onTap: () {
-        getChatId(userEmail!);
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
               return ChatViewBetweenTwo(
-                email: userEmail!,
-                chatId: chatId,
-                friendName: friendModel.name,
-                friendImage: CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-
-                  backgroundImage:
-                      friendModel.image != '' || friendModel.image != null
-                      ? NetworkImage(friendModel.image!)
-                      : null,
-                  radius: 30,
-                  child: friendModel.image != '' || friendModel.image != null
-                      ? null
-                      : Text(
-                          friendModel.name[0],
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          ),
-                        ),
-                ),
+                userEmail: userEmail!,
+                friendModel: friendModel,
               );
             },
           ),
@@ -114,11 +96,11 @@ class FriendWidget extends StatelessWidget {
     );
   }
 
-  void getChatId(String userEmail) {
-    if (userEmail.toLowerCase().compareTo(friendModel.id.toLowerCase()) < 0) {
-      chatId = userEmail + friendModel.id;
-    } else {
-      chatId = friendModel.id + userEmail;
-    }
-  }
+  // void getChatId(String userEmail) {
+  //   if (userEmail.toLowerCase().compareTo(friendModel.id.toLowerCase()) < 0) {
+  //     chatId = userEmail + friendModel.id;
+  //   } else {
+  //     chatId = friendModel.id + userEmail;
+  //   }
+  // }
 }
