@@ -7,7 +7,7 @@ import 'package:chat_with_me_now/Widgets/google_and_facebook_login_widget.dart';
 import 'package:chat_with_me_now/Widgets/horizontal_text_line.dart';
 import 'package:chat_with_me_now/Widgets/page_label.dart';
 import 'package:chat_with_me_now/Widgets/password_text_field_widget.dart';
-import 'package:chat_with_me_now/cubits/login_cubit/login_cubit.dart';
+import 'package:chat_with_me_now/cubits/auth_cubit/auth_cubit.dart';
 import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
@@ -97,7 +97,7 @@ class SignIn extends StatelessWidget {
                           CustomBottom(
                             text: 'Sign In',
                             onTap: () {
-                              BlocProvider.of<LoginCubit>(context).singInMethod(
+                              BlocProvider.of<AuthCubit>(context).singInMethod(
                                 context: context,
                                 email: email,
                                 formKey: formKey,

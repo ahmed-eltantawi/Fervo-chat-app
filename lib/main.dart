@@ -2,10 +2,9 @@ import 'package:chat_with_me_now/Views/acount_view.dart';
 import 'package:chat_with_me_now/Views/home_view.dart';
 import 'package:chat_with_me_now/Views/sign_in_view.dart';
 import 'package:chat_with_me_now/Views/register_view.dart';
+import 'package:chat_with_me_now/cubits/auth_cubit/auth_cubit.dart';
 import 'package:chat_with_me_now/cubits/chat_cubit/chat_cubit.dart';
-import 'package:chat_with_me_now/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
-import 'package:chat_with_me_now/cubits/register/register_cubit.dart';
 import 'package:chat_with_me_now/firebase_options.dart';
 import 'package:chat_with_me_now/theme/theme_probider.dart';
 import 'package:email_otp/email_otp.dart';
@@ -53,9 +52,8 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => PasswordCubit()),
-        BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(create: (context) => ChatCubit()),
       ],
       child: MaterialApp(

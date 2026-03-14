@@ -1,9 +1,7 @@
 import 'package:chat_with_me_now/Views/chat_view.dart';
-import 'package:chat_with_me_now/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_with_me_now/models/friend_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FriendWidget extends StatelessWidget {
   FriendWidget({super.key, required this.friendModel});

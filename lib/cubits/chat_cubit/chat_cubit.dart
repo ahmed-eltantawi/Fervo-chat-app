@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_with_me_now/constants/collections.dart';
 import 'package:chat_with_me_now/models/massage_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,24 +10,25 @@ part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   ChatCubit() : super(ChatInitial());
-  late CollectionReference _massages;
+  late CollectionReference _chats;
   late String _userEmail;
+  late String chatId;
+
   List<MassageModel> massagesList = [];
 
-  CollectionReference getChatId({
-    required String userEmail,
-    required String friendEmail,
-  }) {
-    String chatId;
+  void getCollection({required String userEmail, required String friendEmail}) {
     _userEmail = userEmail;
     if (userEmail.toLowerCase().compareTo(friendEmail.toLowerCase()) < 0) {
-      chatId = userEmail + friendEmail;
+      chatId = "$userEmail and $friendEmail";
     } else {
-      chatId = friendEmail + userEmail;
+      chatId = "$friendEmail and $userEmail";
     }
 
-    _massages = FirebaseFirestore.instance.collection(chatId);
-    return _massages;
+    log(1.toString());
+    _chats = _chats = FirebaseFirestore.instance
+        .collection("Chats")
+        .doc(chatId)
+        .collection(Collections.kMassagesCollection);
   }
 
   void onSubmitted({
@@ -35,9 +38,9 @@ class ChatCubit extends Cubit<ChatState> {
   }) {
     if (value.isEmpty) {
     } else {
-      _massages.add({
+      _chats.add({
         'text': value,
-        kCreatedAtCollection: DateTime.now(),
+        Collections.kCreatedAtCollection: DateTime.now(),
         'id': _userEmail,
       });
       controller.clear();
@@ -53,10 +56,10 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   void getMassages({required String friendEmail, required String userEmail}) {
-    getChatId(friendEmail: friendEmail, userEmail: userEmail);
+    getCollection(friendEmail: friendEmail, userEmail: userEmail);
     emit(ChatLoading());
-    _massages
-        .orderBy(kCreatedAtCollection, descending: true)
+    _chats
+        .orderBy(Collections.kCreatedAtCollection, descending: true)
         .snapshots()
         .listen(
           (event) {

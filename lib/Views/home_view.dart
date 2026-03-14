@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
   static String id = 'HomeView';
 
   final CollectionReference friends = FirebaseFirestore.instance.collection(
-    kFriendsCollection,
+    Collections.kFriendsCollection,
   );
 
   List<FriendModel> friendList = [];

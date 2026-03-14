@@ -12,7 +12,7 @@ Future<void> makeUser(
   image,
 }) async {
   CollectionReference users = FirebaseFirestore.instance.collection(
-    kFriendsCollection,
+    Collections.kFriendsCollection,
   );
   if (!await isThisEmailExists(email)) {
     users.add({
