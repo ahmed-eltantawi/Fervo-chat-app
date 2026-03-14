@@ -1,6 +1,6 @@
 import 'package:chat_with_me_now/Widgets/sing_in_icon.dart';
+import 'package:chat_with_me_now/Features/auth/auth_bloc/auth_bloc.dart';
 import 'package:chat_with_me_now/constants/images.dart';
-import 'package:chat_with_me_now/cubits/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,18 +15,18 @@ class GoogleAndFacebookSingInWidget extends StatelessWidget {
         SingInIcons(
           image: Assets.imagesGoogleIcon,
           onTap: () async {
-            await BlocProvider.of<AuthCubit>(
+            BlocProvider.of<AuthBloc>(
               context,
-            ).googleLogin(context: context);
+            ).add(GoogleLoginEvent(context: context));
           },
         ),
         SizedBox(width: 20),
         SingInIcons(
           image: Assets.imagesFacebookIcon,
           onTap: () async {
-            await BlocProvider.of<AuthCubit>(
+            BlocProvider.of<AuthBloc>(
               context,
-            ).facebookLogin(context: context);
+            ).add(FacebookLoginEvent(context: context));
           },
         ),
       ],

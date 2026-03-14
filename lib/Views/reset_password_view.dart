@@ -7,7 +7,6 @@ import 'package:chat_with_me_now/helper/get_image_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});

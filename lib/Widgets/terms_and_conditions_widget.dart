@@ -1,5 +1,5 @@
 import 'package:chat_with_me_now/Widgets/custom_check_box.dart';
-import 'package:chat_with_me_now/cubits/auth_cubit/auth_cubit.dart';
+import 'package:chat_with_me_now/Features/auth/auth_bloc/auth_bloc.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/web_view.dart';
 import 'package:flutter/material.dart';
@@ -16,19 +16,20 @@ class TermsAndConditionsWidget extends StatefulWidget {
 class _TermsAndConditionsWidgetState extends State<TermsAndConditionsWidget> {
   @override
   Widget build(BuildContext context) {
+    bool isCheckBoxClicked = BlocProvider.of<AuthBloc>(
+      context,
+    ).isCheckBoxClicked;
     return Row(
       children: [
         GestureDetector(
           onTap: () {
-            BlocProvider.of<AuthCubit>(context).isCheckBoxClicked =
-                !BlocProvider.of<AuthCubit>(context).isCheckBoxClicked;
+            isCheckBoxClicked = !isCheckBoxClicked;
           },
           child: CustomCheckbox(
-            value: BlocProvider.of<AuthCubit>(context).isCheckBoxClicked,
+            value: isCheckBoxClicked,
             onChanged: (value) {
               setState(() {
-                BlocProvider.of<AuthCubit>(context).isCheckBoxClicked =
-                    value ?? false;
+                isCheckBoxClicked = value ?? false;
               });
             },
           ),

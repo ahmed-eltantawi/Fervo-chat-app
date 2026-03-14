@@ -7,7 +7,7 @@ import 'package:chat_with_me_now/Widgets/google_and_facebook_login_widget.dart';
 import 'package:chat_with_me_now/Widgets/horizontal_text_line.dart';
 import 'package:chat_with_me_now/Widgets/page_label.dart';
 import 'package:chat_with_me_now/Widgets/password_text_field_widget.dart';
-import 'package:chat_with_me_now/cubits/auth_cubit/auth_cubit.dart';
+import 'package:chat_with_me_now/Features/auth/auth_bloc/auth_bloc.dart';
 import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
@@ -97,14 +97,21 @@ class SignIn extends StatelessWidget {
                           CustomBottom(
                             text: 'Sign In',
                             onTap: () {
-                              BlocProvider.of<AuthCubit>(context).singInMethod(
-                                context: context,
-                                email: email,
-                                formKey: formKey,
-                                password: BlocProvider.of<PasswordCubit>(
-                                  context,
-                                ).password,
-                              );
+                              if (formKey.currentState!.validate()) {
+                                BlocProvider.of<AuthBloc>(context).add(
+                                  LoginEvent(
+                                    context: context,
+                                    email: email!,
+                                    password: BlocProvider.of<PasswordCubit>(
+                                      context,
+                                    ).password,
+                                  ),
+                                );
+                                if (state is LoginSuccess) {
+                                  email = '';
+                                  password = '';
+                                }
+                              }
                             },
                           ),
                           SizedBox(height: 40),

@@ -4,7 +4,7 @@ import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
 import 'package:chat_with_me_now/Widgets/page_label.dart';
 import 'package:chat_with_me_now/Widgets/password_text_field_widget.dart';
 import 'package:chat_with_me_now/Widgets/terms_and_conditions_widget.dart';
-import 'package:chat_with_me_now/cubits/auth_cubit/auth_cubit.dart';
+import 'package:chat_with_me_now/Features/auth/auth_bloc/auth_bloc.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +31,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
@@ -87,12 +87,15 @@ class _RegisterViewState extends State<RegisterView> {
                       CustomBottom(
                         text: 'Create Account',
                         onTap: () {
-                          BlocProvider.of<AuthCubit>(context).registerMethod(
-                            context: context,
-                            email: email,
-                            formKey: formKey,
-                            userName: userName,
-                          );
+                          if (formKey.currentState!.validate()) {
+                            BlocProvider.of<AuthBloc>(context).add(
+                              RegisterEvent(
+                                context: context,
+                                email: email,
+                                userName: userName,
+                              ),
+                            );
+                          }
                         },
                       ),
                       SizedBox(height: 20),

@@ -2,25 +2,21 @@ import 'dart:async';
 
 import 'package:chat_with_me_now/Widgets/custom_bottom.dart';
 import 'package:chat_with_me_now/constants/images.dart';
+import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
+import 'package:chat_with_me_now/features/auth/auth_bloc/register_function.dart';
 import 'package:chat_with_me_now/helper/extensions.dart';
 import 'package:chat_with_me_now/helper/get_image_function.dart';
 import 'package:chat_with_me_now/helper/show_snack_bar.dart';
-import 'package:chat_with_me_now/auth/register_function.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class OTPView extends StatefulWidget {
-  const OTPView({
-    super.key,
-    required this.email,
-    required this.password,
-    required this.userName,
-  });
+  const OTPView({super.key, required this.email, required this.userName});
   final String email;
-  final String password;
   final String userName;
 
   @override
@@ -165,7 +161,9 @@ class _OTPViewState extends State<OTPView> {
                         await registerFunction(
                           context: context,
                           email: widget.email,
-                          password: widget.password,
+                          password: BlocProvider.of<PasswordCubit>(
+                            context,
+                          ).password,
                           userName: widget.userName,
                         );
                       } else {
