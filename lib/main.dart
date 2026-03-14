@@ -1,72 +1,32 @@
-import 'package:chat_with_me_now/Views/acount_view.dart';
-import 'package:chat_with_me_now/Views/home_view.dart';
-import 'package:chat_with_me_now/Views/sign_in_view.dart';
-import 'package:chat_with_me_now/Views/register_view.dart';
-import 'package:chat_with_me_now/Features/auth/auth_bloc/auth_bloc.dart';
-import 'package:chat_with_me_now/cubits/chat_cubit/chat_cubit.dart';
-import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
+import 'package:chat_with_me_now/app.dart';
 import 'package:chat_with_me_now/firebase_options.dart';
-import 'package:chat_with_me_now/theme/theme_probider.dart';
 import 'package:email_otp/email_otp.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:chat_with_me_now/config/env/env_config.dart';
 
 void main() async {
-  // Firebase
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebase initialization
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  //OTP Settings
+  // OTP Settings
   EmailOTP.config(
-    appName: 'Fervo',
-    otpLength: 4,
+    appName: EnvConfig.appName,
+    otpLength: EnvConfig.otpLength,
     otpType: OTPType.numeric,
     emailTheme: EmailTheme.v3,
   );
+  // SMTP Server Settings
 
-  //Server Settings
   EmailOTP.setSMTP(
-    host: 'smtp.gmail.com',
+    host: EnvConfig.smtpHost,
     emailPort: EmailPort.port587,
     secureType: SecureType.tls,
-    username: 'listen.me.127@gmail.com',
-    password: 'wjtm lmre tdeo azot',
+    username: EnvConfig.smtpUsername,
+    password: EnvConfig.smtpPassword,
   );
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: ChatApp(),
-    ),
-  );
-}
-
-class ChatApp extends StatelessWidget {
-  ChatApp({super.key});
-  final User? user = FirebaseAuth.instance.currentUser;
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => AuthBloc()),
-        BlocProvider(create: (context) => PasswordCubit()),
-        BlocProvider(create: (context) => ChatCubit()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: Provider.of<ThemeProvider>(context).themeData,
-        routes: {
-          SignIn.id: (context) => SignIn(),
-          RegisterView.id: (context) => RegisterView(),
-          HomeView.id: (context) => HomeView(),
-          AccountView.id: (context) => AccountView(),
-        },
-        initialRoute: user?.email == null ? SignIn.id : HomeView.id,
-      ),
-    );
-  }
+  runApp(const ChatApp());
 }

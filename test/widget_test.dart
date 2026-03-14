@@ -1,7 +1,7 @@
-import 'package:chat_with_me_now/Widgets/custom_form_text_field.dart';
-import 'package:chat_with_me_now/Widgets/password_text_field_widget.dart';
-import 'package:chat_with_me_now/cubits/password_cubit/password_cubit.dart';
-import 'package:chat_with_me_now/theme/light_mode_theme.dart';
+import 'package:chat_with_me_now/config/theme/light_mode_theme.dart';
+import 'package:chat_with_me_now/core/widgets/custom_form_text_field.dart';
+import 'package:chat_with_me_now/features/auth/cubit/password_cubit/password_cubit.dart';
+import 'package:chat_with_me_now/features/auth/widgets/password_text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -45,7 +45,9 @@ void main() {
       ),
     );
 
-    final textFormField = tester.widget<TextFormField>(find.byType(TextFormField));
+    final textFormField = tester.widget<TextFormField>(
+      find.byType(TextFormField),
+    );
     expect(textFormField.obscureText, isTrue);
 
     await tester.tap(find.byType(IconButton));
@@ -56,4 +58,8 @@ void main() {
     );
     expect(updatedTextFormField.obscureText, isFalse);
   });
+}
+
+extension on TextFormField {
+  Null get obscureText => null;
 }
