@@ -109,112 +109,87 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
 ## 🏗 Project Structure
 
 ```
-Fervo_chat_app/
-├── assets/
-│   ├── fonts/
-│   │   └── Pacifico-Regular.ttf
-│   ├── images/
-│   │   ├── icons_and_logos/
-│   │   │   ├── Inverse_app_icon.png
-│   │   │   ├── app_icon.png
-│   │   │   ├── app_icon_with_background.png
-│   │   │   ├── facebook-icon.png
-│   │   │   └── google_icon.png
-│   │   ├── lotties/
-│   │   │   ├── email_sended.json
-│   │   │   ├── error.json
-│   │   │   ├── error_x.json
-│   │   │   ├── no_massage_yet.json
-│   │   │   ├── reset_password.json
-│   │   │   └── reset_password_email_is_sended.json
-│   │   └── profile.jpg
-│   └── screens/
-│       ├── forget_password_view.png
-│       ├── login_view.png
-│       ├── otp_view.png
-│       └── regester_view.png
-│
-├── lib/
-│   ├── main.dart                      # App entry point
-│   ├── app.dart                       # Root MaterialApp widget
-│   ├── firebase_options.dart          # Firebase configuration
-│   │
-│   ├── config/
-│   │   ├── constants/
-│   │   │   ├── collections.dart       # Firestore collection names
-│   │   │   └── images.dart            # Asset image paths
-│   │   ├── env/
-│   │   │   └── env_config.dart        # Environment configuration
-│   │   ├── routes/
-│   │   │   └── app_routes.dart        # Named route definitions
-│   │   └── theme/
-│   │       ├── dark_mode_theme.dart    # Dark theme data
-│   │       ├── light_mode_theme.dart   # Light theme data
-│   │       └── theme_provider.dart     # Theme state management
-│   │
-│   ├── core/
-│   │   ├── helpers/
-│   │   │   ├── app_image.dart.dart    # Image loading helper
-│   │   │   ├── extensions.dart        # Dart extensions
-│   │   │   ├── show_snack_bar.dart    # SnackBar utility
-│   │   │   ├── vibration.dart         # Haptic feedback helper
-│   │   │   └── web_view.dart          # WebView helper
-│   │   ├── models/
-│   │   │   ├── friend_model.dart      # Friend data model
-│   │   │   └── message_model.dart     # Message data model
-│   │   ├── view/
-│   │   │   ├── drawer_view.dart       # App drawer
-│   │   │   └── error_view.dart        # Error page
-│   │   └── widgets/
-│   │       ├── app_icon_widget.dart    # App logo widget
-│   │       ├── custom_button.dart      # Reusable button
-│   │       ├── custom_form_text_field.dart  # Reusable text field
-│   │       ├── error_widget.dart       # Error display widget
-│   │       ├── horizontal_text_line.dart   # Divider with text
-│   │       └── page_label.dart         # Page title label
-│   │
-│   └── features/
-│       ├── auth/
-│       │   ├── bloc/
-│       │   │   ├── auth_bloc.dart      # Auth BLoC logic
-│       │   │   ├── auth_event.dart     # Auth events
-│       │   │   └── auth_state.dart     # Auth states
-│       │   ├── cubit/
-│       │   │   └── password_cubit/
-│       │   │       ├── password_cubit.dart  # Password visibility cubit
-│       │   │       └── password_state.dart  # Password cubit states
-│       │   ├── services/
-│       │   │   └── auth_service.dart   # Firebase Auth service
-│       │   ├── views/
-│       │   │   ├── account_view.dart   # Account/profile screen
-│       │   │   ├── otp_view.dart       # OTP verification screen
-│       │   │   ├── register_view.dart  # Registration screen
-│       │   │   ├── reset_password_view.dart  # Password reset screen
-│       │   │   └── sign_in_view.dart   # Login screen
-│       │   └── widgets/
-│       │       ├── custom_check_box.dart            # Terms checkbox
-│       │       ├── google_and_facebook_login_widget.dart  # Social login buttons
-│       │       ├── password_text_field_widget.dart   # Password input field
-│       │       ├── sign_in_icon.dart                 # Sign-in icon button
-│       │       ├── terms_and_conditions_widget.dart  # T&C widget
-│       │       └── update_profile_photo.dart         # Profile photo picker
-│       │
-│       ├── chat/
-│       │   ├── cubit/
-│       │   │   ├── chat_cubit.dart     # Chat state management
-│       │   │   └── chat_state.dart     # Chat cubit states
-│       │   ├── views/
-│       │   │   ├── chat_view.dart      # Chat conversation screen
-│       │   │   └── home_view.dart      # Friends/home screen
-│       │   └── widgets/
-│       │       ├── chat_bubble.dart              # Message bubble
-│       │       ├── friend_widget.dart            # Friend list item
-│       │       ├── message_text_field_widget.dart # Message input field
-│       │       └── no_messages_yet_widget.dart    # Empty chat placeholder
-│       │
-│       └── settings/
-│           └── views/
-│               └── settings_view.dart  # Settings screen
+   lib/
+   ├── main.dart                      # App entry point
+   ├── app.dart                       # Root MaterialApp widget
+   ├── firebase_options.dart          # Firebase configuration
+   │
+   ├── config/
+   │   ├── constants/
+   │   │   ├── collections.dart       # Firestore collection names
+   │   │   └── images.dart            # Asset image paths
+   │   ├── env/
+   │   │   └── env_config.dart        # Environment configuration
+   │   ├── routes/
+   │   │   └── app_routes.dart        # Named route definitions
+   │   └── theme/
+   │       ├── dark_mode_theme.dart    # Dark theme data
+   │       ├── light_mode_theme.dart   # Light theme data
+   │       └── theme_provider.dart     # Theme state management
+   │
+   ├── core/
+   │   ├── helpers/
+   │   │   ├── app_image.dart.dart    # Image loading helper
+   │   │   ├── extensions.dart        # Dart extensions
+   │   │   ├── show_snack_bar.dart    # SnackBar utility
+   │   │   ├── vibration.dart         # Haptic feedback helper
+   │   │   └── web_view.dart          # WebView helper
+   │   ├── models/
+   │   │   ├── friend_model.dart      # Friend data model
+   │   │   └── message_model.dart     # Message data model
+   │   ├── view/
+   │   │   ├── drawer_view.dart       # App drawer
+   │   │   └── error_view.dart        # Error page
+   │   └── widgets/
+   │       ├── app_icon_widget.dart    # App logo widget
+   │       ├── custom_button.dart      # Reusable button
+   │       ├── custom_form_text_field.dart  # Reusable text field
+   │       ├── error_widget.dart       # Error display widget
+   │       ├── horizontal_text_line.dart   # Divider with text
+   │       └── page_label.dart         # Page title label
+   │
+   └── features/
+       ├── auth/
+       │   ├── bloc/
+       │   │   ├── auth_bloc.dart      # Auth BLoC logic
+       │   │   ├── auth_event.dart     # Auth events
+       │   │   └── auth_state.dart     # Auth states
+       │   ├── cubit/
+       │   │   └── password_cubit/
+       │   │       ├── password_cubit.dart  # Password visibility cubit
+       │   │       └── password_state.dart  # Password cubit states
+       │   ├── services/
+       │   │   └── auth_service.dart   # Firebase Auth service
+       │   ├── views/
+       │   │   ├── account_view.dart   # Account/profile screen
+       │   │   ├── otp_view.dart       # OTP verification screen
+       │   │   ├── register_view.dart  # Registration screen
+       │   │   ├── reset_password_view.dart  # Password reset screen
+       │   │   └── sign_in_view.dart   # Login screen
+       │   └── widgets/
+       │       ├── custom_check_box.dart            # Terms checkbox
+       │       ├── google_and_facebook_login_widget.dart  # Social login buttons
+       │       ├── password_text_field_widget.dart   # Password input field
+       │       ├── sign_in_icon.dart                 # Sign-in icon button
+       │       ├── terms_and_conditions_widget.dart  # T&C widget
+       │       └── update_profile_photo.dart         # Profile photo picker
+       │
+       ├── chat/
+       │   ├── cubit/
+       │   │   ├── chat_cubit.dart     # Chat state management
+       │   │   └── chat_state.dart     # Chat cubit states
+       │   ├── views/
+       │   │   ├── chat_view.dart      # Chat conversation screen
+       │   │   └── home_view.dart      # Friends/home screen
+       │   └── widgets/
+       │       ├── chat_bubble.dart              # Message bubble
+       │       ├── friend_widget.dart            # Friend list item
+       │       ├── message_text_field_widget.dart # Message input field
+       │       └── no_messages_yet_widget.dart    # Empty chat placeholder
+       │
+       └── settings/
+           └── views/
+               └── settings_view.dart  # Settings screen
 ```
 
 ---
