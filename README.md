@@ -1,7 +1,7 @@
 # 🔥 Fervo Chat
 
 <p align="center">
-  <img src="assets/images/icons_and_logos/app_icon.png" alt="Fervo Chat Logo" width="200"/>
+  <img src="assets/images/icons_and_logos/app_icon_with_background.png" alt="Fervo Chat Logo" width="200"/>
 </p>
 
 <p align="center">
