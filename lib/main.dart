@@ -1,4 +1,5 @@
 import 'package:chat_with_me_now/app.dart';
+import 'package:chat_with_me_now/core/helpers/app_respnsive.dart';
 import 'package:chat_with_me_now/firebase_options.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,5 +29,5 @@ void main() async {
     password: EnvConfig.smtpPassword,
   );
 
-  runApp(const ChatApp());
+  runApp(AppResponsive(width: 411.5, child: const ChatApp()));
 }

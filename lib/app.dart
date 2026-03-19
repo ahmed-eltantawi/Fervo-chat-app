@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_with_me_now/config/routes/app_routes.dart';
 import 'package:chat_with_me_now/features/auth/bloc/auth_bloc.dart';
 import 'package:chat_with_me_now/features/auth/cubit/password_cubit/password_cubit.dart';
@@ -13,6 +15,7 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(MediaQuery.of(context).size.width.toString());
     final User? user = FirebaseAuth.instance.currentUser;
 
     return ChangeNotifierProvider(
