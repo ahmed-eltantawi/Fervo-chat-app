@@ -28,6 +28,5 @@ void main() async {
     username: EnvConfig.smtpUsername,
     password: EnvConfig.smtpPassword,
   );
-
-  runApp(AppResponsive(width: 411.5, child: const ChatApp()));
+  runApp(AppResponsive(width: 411.42857, child: const ChatApp()));
 }
