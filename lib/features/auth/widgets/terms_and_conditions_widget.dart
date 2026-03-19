@@ -16,20 +16,21 @@ class TermsAndConditionsWidget extends StatefulWidget {
 class _TermsAndConditionsWidgetState extends State<TermsAndConditionsWidget> {
   @override
   Widget build(BuildContext context) {
-    bool isCheckBoxClicked = BlocProvider.of<AuthBloc>(
-      context,
-    ).isCheckBoxClicked;
+    final bloc = BlocProvider.of<AuthBloc>(context);
+
     return Row(
       children: [
         GestureDetector(
           onTap: () {
-            isCheckBoxClicked = !isCheckBoxClicked;
+            setState(() {
+              bloc.isCheckBoxClicked = !bloc.isCheckBoxClicked;
+            });
           },
           child: CustomCheckbox(
-            value: isCheckBoxClicked,
+            value: bloc.isCheckBoxClicked,
             onChanged: (value) {
               setState(() {
-                isCheckBoxClicked = value ?? false;
+                bloc.isCheckBoxClicked = value ?? false;
               });
             },
           ),
