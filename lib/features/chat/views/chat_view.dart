@@ -55,7 +55,9 @@ class ChatViewBetweenTwo extends StatelessWidget {
                     ),
                   );
                 } else if (state is ChatNoMassagesYetWidget) {
-                  return NoMessagesWidget(friendModel: friendModel);
+                  return FittedBox(
+                    child: NoMessagesWidget(friendModel: friendModel),
+                  );
                 } else if (state is ChatSusses) {
                   return ListView.builder(
                     reverse: true,
