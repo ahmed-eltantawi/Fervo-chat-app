@@ -1,5 +1,6 @@
 import 'package:chat_with_me_now/config/routes/app_routes.dart';
 import 'package:chat_with_me_now/features/auth/bloc/auth_bloc.dart';
+import 'package:chat_with_me_now/features/auth/cubit/cubit/otp_cubit.dart';
 import 'package:chat_with_me_now/features/auth/cubit/password_cubit/password_cubit.dart';
 import 'package:chat_with_me_now/features/chat/cubit/chat_cubit.dart';
 import 'package:chat_with_me_now/config/theme/theme_provider.dart';
@@ -22,6 +23,7 @@ class ChatApp extends StatelessWidget {
           BlocProvider(create: (context) => AuthBloc()),
           BlocProvider(create: (context) => PasswordCubit()),
           BlocProvider(create: (context) => ChatCubit()),
+          BlocProvider(create: (context) => OtpCubit()),
         ],
         child: Builder(
           builder: (context) {
