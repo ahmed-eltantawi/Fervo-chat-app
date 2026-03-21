@@ -31,17 +31,17 @@
 
 
 ### 📱DEMO
-<table>
-  <tr>
-    <td align="center"><strong>DEMO</strong></td>
-    <td align="center"><strong>Reset Password</strong></td>
-  </tr>
-  <tr>
-    <td>https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e</td>
-    <td>https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec</td>
-  </tr>
+<p align="center">
+  <a href="https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e">
+    <img src="assets/screens/demo_preview.png" width="45%" />
+  </a>
+  
+  <a href="https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec">
+    <img src="assets/screens/reset_preview.png" width="45%" />
+  </a>
+</p>
 
-
+---
 
 
 
