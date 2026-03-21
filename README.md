@@ -50,6 +50,7 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
     <td><img src="assets/screens/login_dark.png" alt="Login Dark" width="300"/></td>
     <td><img src="assets/screens/login_light.png" alt="Login Light" width="300"/></td>
   </tr>
+
   <tr>
     <td align="center"><strong>Register (Dark)</strong></td>
     <td align="center"><strong>Register (Light)</strong></td>
@@ -58,6 +59,7 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
     <td><img src="assets/screens/register_dark.png" alt="Register Dark" width="300"/></td>
     <td><img src="assets/screens/register_light.png" alt="Register Light" width="300"/></td>
   </tr>
+
   <tr>
     <td align="center"><strong>OTP Verification (Dark)</strong></td>
     <td align="center"><strong>OTP Verification (Light)</strong></td>
@@ -66,6 +68,7 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
     <td><img src="assets/screens/otp_dark.png" alt="OTP Dark" width="300"/></td>
     <td><img src="assets/screens/otp_light.png" alt="OTP Light" width="300"/></td>
   </tr>
+
   <tr>
     <td align="center"><strong>Reset Password (Dark)</strong></td>
     <td align="center"><strong>Reset Password (Light)</strong></td>
@@ -74,6 +77,7 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
     <td><img src="assets/screens/reset_password_dark.png" alt="Reset Password Dark" width="300"/></td>
     <td><img src="assets/screens/reset_password_light.png" alt="Reset Password Light" width="300"/></td>
   </tr>
+
   <tr>
     <td align="center"><strong>Chat (Dark)</strong></td>
     <td align="center"><strong>Chat (Light)</strong></td>
@@ -82,6 +86,17 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
     <td><img src="assets/screens/chat_dark.png" alt="Chat Dark" width="300"/></td>
     <td><img src="assets/screens/chat_light.png" alt="Chat Light" width="300"/></td>
   </tr>
+
+  <!-- NEW: Chat Page -->
+  <tr>
+    <td align="center"><strong>Chat Page (Dark)</strong></td>
+    <td align="center"><strong>Chat Page (Light)</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/chat_page_dark.png" alt="Chat Page Dark" width="300"/></td>
+    <td><img src="assets/screens/chat_page_light.png" alt="Chat Page Light" width="300"/></td>
+  </tr>
+
   <tr>
     <td align="center"><strong>Drawer (Dark)</strong></td>
     <td align="center"><strong>Drawer (Light)</strong></td>
@@ -90,6 +105,7 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
     <td><img src="assets/screens/drawer_dark.png" alt="Drawer Dark" width="300"/></td>
     <td><img src="assets/screens/drawer_light.png" alt="Drawer Light" width="300"/></td>
   </tr>
+
   <tr>
     <td align="center"><strong>Logout (Dark)</strong></td>
     <td align="center"><strong>Logout (Light)</strong></td>
@@ -98,6 +114,7 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
     <td><img src="assets/screens/logout_dark.png" alt="Logout Dark" width="300"/></td>
     <td><img src="assets/screens/logout_light.png" alt="Logout Light" width="300"/></td>
   </tr>
+
   <tr>
     <td align="center"><strong>Error (Dark)</strong></td>
     <td align="center"><strong>Error (Light)</strong></td>
