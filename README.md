@@ -43,22 +43,71 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
 
 <table>
   <tr>
-    <td align="center"><strong>Login Page</strong></td>
-    <td align="center"><strong>Register Page</strong></td>
+    <td align="center"><strong>Login (Dark)</strong></td>
+    <td align="center"><strong>Login (Light)</strong></td>
   </tr>
   <tr>
-    <td><img src="assets/screens/login_view.png" alt="Login Page" width="300"/></td>
-    <td><img src="assets/screens/regester_view.png" alt="Register Page" width="300"/></td>
+    <td><img src="assets/screens/login_dark.png" alt="Login Dark" width="300"/></td>
+    <td><img src="assets/screens/login_light.png" alt="Login Light" width="300"/></td>
   </tr>
   <tr>
-    <td align="center"><strong>OTP Verification</strong></td>
-    <td align="center"><strong>Forget Password</strong></td>
+    <td align="center"><strong>Register (Dark)</strong></td>
+    <td align="center"><strong>Register (Light)</strong></td>
   </tr>
   <tr>
-    <td><img src="assets/screens/otp_view.png" alt="OTP Verification" width="300"/></td>
-    <td><img src="assets/screens/forget_password_view.png" alt="Forget Password" width="300"/></td>
+    <td><img src="assets/screens/register_dark.png" alt="Register Dark" width="300"/></td>
+    <td><img src="assets/screens/register_light.png" alt="Register Light" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>OTP Verification (Dark)</strong></td>
+    <td align="center"><strong>OTP Verification (Light)</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/otp_dark.png" alt="OTP Dark" width="300"/></td>
+    <td><img src="assets/screens/otp_light.png" alt="OTP Light" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Reset Password (Dark)</strong></td>
+    <td align="center"><strong>Reset Password (Light)</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/reset_password_dark.png" alt="Reset Password Dark" width="300"/></td>
+    <td><img src="assets/screens/reset_password_light.png" alt="Reset Password Light" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Chat (Dark)</strong></td>
+    <td align="center"><strong>Chat (Light)</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/chat_dark.png" alt="Chat Dark" width="300"/></td>
+    <td><img src="assets/screens/chat_light.png" alt="Chat Light" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Drawer (Dark)</strong></td>
+    <td align="center"><strong>Drawer (Light)</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/drawer_dark.png" alt="Drawer Dark" width="300"/></td>
+    <td><img src="assets/screens/drawer_light.png" alt="Drawer Light" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Logout (Dark)</strong></td>
+    <td align="center"><strong>Logout (Light)</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/logout_dark.png" alt="Logout Dark" width="300"/></td>
+    <td><img src="assets/screens/logout_light.png" alt="Logout Light" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Error (Dark)</strong></td>
+    <td align="center"><strong>Error (Light)</strong></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screens/error_dark.png" alt="Error Dark" width="300"/></td>
+    <td><img src="assets/screens/error_light.png" alt="Error Light" width="300"/></td>
   </tr>
 </table>
+
 ---
 
 ## ✨ Features
@@ -109,87 +158,103 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
 ## 🏗 Project Structure
 
 ```
-   lib/
-   ├── main.dart                      # App entry point
-   ├── app.dart                       # Root MaterialApp widget
-   ├── firebase_options.dart          # Firebase configuration
-   │
-   ├── config/
-   │   ├── constants/
-   │   │   ├── collections.dart       # Firestore collection names
-   │   │   └── images.dart            # Asset image paths
-   │   ├── env/
-   │   │   └── env_config.dart        # Environment configuration
-   │   ├── routes/
-   │   │   └── app_routes.dart        # Named route definitions
-   │   └── theme/
-   │       ├── dark_mode_theme.dart    # Dark theme data
-   │       ├── light_mode_theme.dart   # Light theme data
-   │       └── theme_provider.dart     # Theme state management
-   │
-   ├── core/
-   │   ├── helpers/
-   │   │   ├── app_image.dart.dart    # Image loading helper
-   │   │   ├── extensions.dart        # Dart extensions
-   │   │   ├── show_snack_bar.dart    # SnackBar utility
-   │   │   ├── vibration.dart         # Haptic feedback helper
-   │   │   └── web_view.dart          # WebView helper
-   │   ├── models/
-   │   │   ├── friend_model.dart      # Friend data model
-   │   │   └── message_model.dart     # Message data model
-   │   ├── view/
-   │   │   ├── drawer_view.dart       # App drawer
-   │   │   └── error_view.dart        # Error page
-   │   └── widgets/
-   │       ├── app_icon_widget.dart    # App logo widget
-   │       ├── custom_button.dart      # Reusable button
-   │       ├── custom_form_text_field.dart  # Reusable text field
-   │       ├── error_widget.dart       # Error display widget
-   │       ├── horizontal_text_line.dart   # Divider with text
-   │       └── page_label.dart         # Page title label
-   │
-   └── features/
-       ├── auth/
-       │   ├── bloc/
-       │   │   ├── auth_bloc.dart      # Auth BLoC logic
-       │   │   ├── auth_event.dart     # Auth events
-       │   │   └── auth_state.dart     # Auth states
-       │   ├── cubit/
-       │   │   └── password_cubit/
-       │   │       ├── password_cubit.dart  # Password visibility cubit
-       │   │       └── password_state.dart  # Password cubit states
-       │   ├── services/
-       │   │   └── auth_service.dart   # Firebase Auth service
-       │   ├── views/
-       │   │   ├── account_view.dart   # Account/profile screen
-       │   │   ├── otp_view.dart       # OTP verification screen
-       │   │   ├── register_view.dart  # Registration screen
-       │   │   ├── reset_password_view.dart  # Password reset screen
-       │   │   └── sign_in_view.dart   # Login screen
-       │   └── widgets/
-       │       ├── custom_check_box.dart            # Terms checkbox
-       │       ├── google_and_facebook_login_widget.dart  # Social login buttons
-       │       ├── password_text_field_widget.dart   # Password input field
-       │       ├── sign_in_icon.dart                 # Sign-in icon button
-       │       ├── terms_and_conditions_widget.dart  # T&C widget
-       │       └── update_profile_photo.dart         # Profile photo picker
-       │
-       ├── chat/
-       │   ├── cubit/
-       │   │   ├── chat_cubit.dart     # Chat state management
-       │   │   └── chat_state.dart     # Chat cubit states
-       │   ├── views/
-       │   │   ├── chat_view.dart      # Chat conversation screen
-       │   │   └── home_view.dart      # Friends/home screen
-       │   └── widgets/
-       │       ├── chat_bubble.dart              # Message bubble
-       │       ├── friend_widget.dart            # Friend list item
-       │       ├── message_text_field_widget.dart # Message input field
-       │       └── no_messages_yet_widget.dart    # Empty chat placeholder
-       │
-       └── settings/
-           └── views/
-               └── settings_view.dart  # Settings screen
+lib/
+│
+├── config/
+│   ├── constants/
+│   │   ├── collections.dart
+│   │   └── images.dart
+│   │
+│   ├── env/
+│   │   └── env_config.dart
+│   │
+│   ├── routes/
+│   │   └── app_routes.dart
+│   │
+│   └── theme/
+│       ├── dark_mode_theme.dart
+│       ├── light_mode_theme.dart
+│       └── theme_provider.dart
+│
+├── core/
+│   └── helpers/
+│       ├── app_image.dart
+│       ├── app_responsive.dart
+│       ├── extensions.dart
+│       ├── show_snack_bar.dart
+│       ├── vibration.dart
+│       └── web_view.dart
+│
+├── models/
+│   ├── friend_model.dart
+│   └── message_model.dart
+│
+├── view/
+│   ├── drawer_view.dart
+│   └── error_view.dart
+│
+├── widgets/
+│   ├── app_icon_widget.dart
+│   ├── custom_button.dart
+│   ├── custom_form_text_field.dart
+│   ├── error_widget.dart
+│   ├── horizontal_text_line.dart
+│   └── page_label.dart
+│
+├── features/
+│   ├── auth/
+│   │   ├── bloc/
+│   │   │   ├── auth_bloc.dart
+│   │   │   ├── auth_event.dart
+│   │   │   └── auth_state.dart
+│   │   │
+│   │   ├── cubit/
+│   │   │   ├── otp_cubit/
+│   │   │   │   ├── otp_cubit.dart
+│   │   │   │   └── otp_state.dart
+│   │   │   │
+│   │   │   └── password_cubit/
+│   │   │       ├── password_cubit.dart
+│   │   │       └── password_state.dart
+│   │   │
+│   │   ├── services/
+│   │   │   ├── auth_service.dart
+│   │   │   └── otp_services.dart
+│   │   │
+│   │   ├── views/
+│   │   │   ├── account_view.dart
+│   │   │   ├── otp_view.dart
+│   │   │   ├── register_view.dart
+│   │   │   ├── reset_password_view.dart
+│   │   │   └── sign_in_view.dart
+│   │   │
+│   │   └── widgets/
+│   │       ├── custom_check_box.dart
+│   │       ├── custom_text_otp.dart
+│   │       ├── google_and_facebook_login_widget.dart
+│   │       ├── password_text_field_widget.dart
+│   │       ├── sign_in_condition.dart
+│   │       ├── terms_and_conditions_widget.dart
+│   │       └── update_profile_photo.dart
+│   │
+│   ├── chat/
+│   │   ├── cubit/
+│   │   │   ├── chat_cubit.dart
+│   │   │   └── chat_state.dart
+│   │   │
+│   │   ├── views/
+│   │   │   ├── chat_view.dart
+│   │   │   └── home_view.dart
+│   │   │
+│   │   └── widgets/
+│   │
+│   └── settings/
+│       └── views/
+│           └── settings_view.dart
+│
+├── app.dart
+├── firebase_options.dart
+└── main.dart
 ```
 
 ---
