@@ -25,15 +25,16 @@
 ---
 
 # 🤖 Download the Android app here.
-[Donwload now](https://ahmedeltantawi.netlify.app/fervo_chat.apk)
+[Donwload now](https://ahmedeltantawi.netlify.app/projects/fervo_chat.apk)
 
 ---
 
+### 📱 DEMO
+<p>
 
-### 📱DEMO
+  <video src="https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e" width="400" controls></video> <video src="https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec" width="400" controls></video>
 
-
-https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
+</p>
 
 
 
@@ -42,86 +43,74 @@ https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
 ## 📱 App Screenshots
 
 <table>
+  <!-- Login + Register -->
   <tr>
     <td align="center"><strong>Login (Dark)</strong></td>
     <td align="center"><strong>Login (Light)</strong></td>
-  </tr>
-  <tr>
-    <td><img src="assets/screens/login_dark.png" alt="Login Dark" width="300"/></td>
-    <td><img src="assets/screens/login_light.png" alt="Login Light" width="300"/></td>
-  </tr>
-
-  <tr>
     <td align="center"><strong>Register (Dark)</strong></td>
     <td align="center"><strong>Register (Light)</strong></td>
   </tr>
   <tr>
-    <td><img src="assets/screens/register_dark.png" alt="Register Dark" width="300"/></td>
-    <td><img src="assets/screens/register_light.png" alt="Register Light" width="300"/></td>
+    <td><img src="assets/screens/login_dark.png" width="220"/></td>
+    <td><img src="assets/screens/login_light.png" width="220"/></td>
+    <td><img src="assets/screens/register_dark.png" width="220"/></td>
+    <td><img src="assets/screens/register_light.png" width="220"/></td>
   </tr>
 
+  <!-- OTP + Reset Password -->
   <tr>
-    <td align="center"><strong>OTP Verification (Dark)</strong></td>
-    <td align="center"><strong>OTP Verification (Light)</strong></td>
+    <td align="center"><strong>OTP (Dark)</strong></td>
+    <td align="center"><strong>OTP (Light)</strong></td>
+    <td align="center"><strong>Reset (Dark)</strong></td>
+    <td align="center"><strong>Reset (Light)</strong></td>
   </tr>
   <tr>
-    <td><img src="assets/screens/otp_dark.png" alt="OTP Dark" width="300"/></td>
-    <td><img src="assets/screens/otp_light.png" alt="OTP Light" width="300"/></td>
-  </tr>
-
-  <tr>
-    <td align="center"><strong>Reset Password (Dark)</strong></td>
-    <td align="center"><strong>Reset Password (Light)</strong></td>
-  </tr>
-  <tr>
-    <td><img src="assets/screens/reset_password_dark.png" alt="Reset Password Dark" width="300"/></td>
-    <td><img src="assets/screens/reset_password_light.png" alt="Reset Password Light" width="300"/></td>
+    <td><img src="assets/screens/otp_dark.png" width="220"/></td>
+    <td><img src="assets/screens/otp_light.png" width="220"/></td>
+    <td><img src="assets/screens/reset_password_dark.png" width="220"/></td>
+    <td><img src="assets/screens/reset_password_light.png" width="220"/></td>
   </tr>
 
+  <!-- Chat + Chat Page -->
   <tr>
     <td align="center"><strong>Chat (Dark)</strong></td>
     <td align="center"><strong>Chat (Light)</strong></td>
-  </tr>
-  <tr>
-    <td><img src="assets/screens/chat_dark.png" alt="Chat Dark" width="300"/></td>
-    <td><img src="assets/screens/chat_light.png" alt="Chat Light" width="300"/></td>
-  </tr>
-
-  <!-- NEW: Chat Page -->
-  <tr>
     <td align="center"><strong>Chat Page (Dark)</strong></td>
     <td align="center"><strong>Chat Page (Light)</strong></td>
   </tr>
   <tr>
-    <td><img src="assets/screens/chat_page_dark.png" alt="Chat Page Dark" width="300"/></td>
-    <td><img src="assets/screens/chat_page_light.png" alt="Chat Page Light" width="300"/></td>
+    <td><img src="assets/screens/chat_dark.png" width="220"/></td>
+    <td><img src="assets/screens/chat_light.png" width="220"/></td>
+    <td><img src="assets/screens/chat_page_dark.png" width="220"/></td>
+    <td><img src="assets/screens/chat_page_light.png" width="220"/></td>
   </tr>
 
+  <!-- Drawer + Logout -->
   <tr>
     <td align="center"><strong>Drawer (Dark)</strong></td>
     <td align="center"><strong>Drawer (Light)</strong></td>
-  </tr>
-  <tr>
-    <td><img src="assets/screens/drawer_dark.png" alt="Drawer Dark" width="300"/></td>
-    <td><img src="assets/screens/drawer_light.png" alt="Drawer Light" width="300"/></td>
-  </tr>
-
-  <tr>
     <td align="center"><strong>Logout (Dark)</strong></td>
     <td align="center"><strong>Logout (Light)</strong></td>
   </tr>
   <tr>
-    <td><img src="assets/screens/logout_dark.png" alt="Logout Dark" width="300"/></td>
-    <td><img src="assets/screens/logout_light.png" alt="Logout Light" width="300"/></td>
+    <td><img src="assets/screens/drawer_dark.png" width="220"/></td>
+    <td><img src="assets/screens/drawer_light.png" width="220"/></td>
+    <td><img src="assets/screens/logout_dark.png" width="220"/></td>
+    <td><img src="assets/screens/logout_light.png" width="220"/></td>
   </tr>
 
+  <!-- Error -->
   <tr>
     <td align="center"><strong>Error (Dark)</strong></td>
     <td align="center"><strong>Error (Light)</strong></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td><img src="assets/screens/error_dark.png" alt="Error Dark" width="300"/></td>
-    <td><img src="assets/screens/error_light.png" alt="Error Light" width="300"/></td>
+    <td><img src="assets/screens/error_dark.png" width="220"/></td>
+    <td><img src="assets/screens/error_light.png" width="220"/></td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
 
@@ -473,5 +462,5 @@ This project was a significant learning experience where I explored and applied 
 ---
 
 <p align="center">
-  Made with ❤️ using Flutter & Firebase
+  Made with & using Flutter & Firebase
 </p>
