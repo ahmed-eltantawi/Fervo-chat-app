@@ -31,6 +31,24 @@
 
 
 ### 📱DEMO
+<table>
+  <tr>
+    <td align="center"><strong>DEMO</strong></td>
+    <td align="center"><strong>Reset Password</strong></td>
+  </tr>
+  <tr>
+    <td>https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e</td>
+    <td>https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec</td>
+  </tr>
+
+
+
+
+
+
+
+
+
 
 
 https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
