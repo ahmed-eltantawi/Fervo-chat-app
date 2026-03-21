@@ -31,12 +31,11 @@
 
 
 ### 📱DEMO
-<p align="center">
  https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e
   
 https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec
 
-</p>
+
 
 ---
 
