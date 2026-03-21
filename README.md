@@ -31,10 +31,10 @@
 
 ### 📱 DEMO
 
-<div style="display: flex; gap: 10px;">
-  <video src="https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e" width="45%" controls></video>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  <video src="https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e" width="400" controls></video>
 
-  <video src="https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec" width="45%" controls></video>
+  <video src="https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec" width="400" controls></video>
 </div>
 
 
