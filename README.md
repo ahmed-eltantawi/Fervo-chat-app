@@ -32,19 +32,9 @@
 ### 📱 DEMO
 <p>
 
-  <video src="https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e" width="400" controls></video>
-
-  <video src="https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec" width="400" controls></video>
+  <video src="https://github.com/user-attachments/assets/a22b31f6-aec1-492c-8e39-0221be4d3a3e" width="400" controls></video> <video src="https://github.com/user-attachments/assets/ce27e50d-cf7d-4ca1-83b8-9b743f5dd1ec" width="400" controls></video>
 
 </p>
-
-
-
-
-
-
-
-https://github.com/user-attachments/assets/540b9b4e-a5ae-47bb-a4fb-5450db1c21ca
 
 
 
