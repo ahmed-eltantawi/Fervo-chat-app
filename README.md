@@ -462,5 +462,5 @@ This project was a significant learning experience where I explored and applied 
 ---
 
 <p align="center">
-  Made with ❤️ using Flutter & Firebase
+  Made with & using Flutter & Firebase
 </p>
