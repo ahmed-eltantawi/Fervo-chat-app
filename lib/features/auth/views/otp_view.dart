@@ -115,7 +115,6 @@ class _OTPViewState extends State<OTPView> {
                     "We've sent a 4-digit code to",
                     style: TextStyle(fontSize: 16),
                   ),
-
                   Text(
                     widget.email,
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -148,13 +147,10 @@ class _OTPViewState extends State<OTPView> {
                         showSnackBar(context, 'Please enter all digits');
                         return;
                       }
-
                       setState(() {
                         isLoading = true;
                       });
-
                       String otp = pins.join();
-
                       if (EmailOTP.verifyOTP(otp: otp)) {
                         if (!mounted) return;
                         showSnackBar(context, 'OTP is correct');
@@ -170,7 +166,7 @@ class _OTPViewState extends State<OTPView> {
                         if (!mounted) return;
                         showSnackBar(context, 'OTP is incorrect');
                         setState(() {
-                          AppImage(image: Assets.imagesErrorX);
+                          image = Assets.imagesErrorX;
                         });
                         _clearAllPins();
                       }

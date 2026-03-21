@@ -143,6 +143,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 ),
               );
               emit(RegisterSuccess());
+              return;
             } on FirebaseAuthException catch (e) {
               emit(RegisterFailure());
               vibration();
@@ -168,16 +169,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             }
           }
         }
-        emit(RegisterFailure());
-        vibration();
-        Navigator.push(
-          event.context,
-          MaterialPageRoute(
-            builder: (context) {
-              return ErrorView();
-            },
-          ),
-        );
       }
     });
   }
