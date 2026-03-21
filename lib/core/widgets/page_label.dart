@@ -8,6 +8,7 @@ class PageLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 18,
         color: Theme.of(context).colorScheme.secondary,

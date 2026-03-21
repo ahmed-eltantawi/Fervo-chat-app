@@ -41,6 +41,7 @@ class OtpCubit extends Cubit<OtpState> {
     emit(OtpLoading());
     String otp = pins.join();
     if (EmailOTP.verifyOTP(otp: otp)) {
+      emit(OtpVerified());
       showSnackBar(context, 'OTP is correct');
       await AuthService.registerFunction(
         context: context,
@@ -48,7 +49,6 @@ class OtpCubit extends Cubit<OtpState> {
         password: BlocProvider.of<PasswordCubit>(context).password,
         userName: userName,
       );
-      emit(OtpSuccess());
     } else {
       showSnackBar(context, 'OTP is incorrect');
 
@@ -77,7 +77,7 @@ class OtpCubit extends Cubit<OtpState> {
         secondsRemaining: secondsRemaining,
         timer: _timer,
       );
-      emit(OtpSuccess());
+      emit(OtpSendedSuccessfully());
     } catch (e) {
       emit(OtpFailure());
     }

@@ -6,6 +6,8 @@ final class OtpInitial extends OtpState {}
 
 final class OtpFailure extends OtpState {}
 
-final class OtpSuccess extends OtpState {}
+final class OtpSendedSuccessfully extends OtpState {}
+
+final class OtpVerified extends OtpState {}
 
 final class OtpLoading extends OtpState {}
