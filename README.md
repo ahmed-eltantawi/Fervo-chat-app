@@ -25,7 +25,7 @@
 ---
 
 # 🤖 Download the Android app here.
-[Donwload now](https://ahmedeltantawi.netlify.app/fervo_chat.apk)
+[Donwload now](https://ahmedeltantawi.netlify.app/projects/fervo_chat.apk)
 
 ---
 
